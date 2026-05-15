@@ -1,0 +1,2013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">FIN PORTAL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Montserrat:wght@400;500;600;700;900&family=Merriweather:wght@700;900&family=Raleway:wght@600;700;900&family=EB+Garamond:wght@700&family=Oswald:wght@600;700&family=Cormorant+Garamond:wght@700&family=Barlow+Condensed:wght@600;700&family=Libre+Baskerville:wght@700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --blue:#1a3c8f;--blue-dark:#102a6e;--boa-red:#c0001a;
+  --gold:#e8b84b;--green:#22c55e;--red:#ef4444;
+  --text:#111827;--muted:#6b7280;--light:#f9fafb;--border:#e5e7eb;
+}
+body{font-family:Arial,Helvetica,sans-serif;background:#f0f2f8;color:var(--text);min-height:100vh;}
+
+/* ═══════════════════════════════
+   BOA LOGIN PAGE — pixel perfect
+═══════════════════════════════ */
+#loginPage{
+  min-height:100vh;display:flex;flex-direction:column;
+  background:#fff;
+}
+
+/* BOA top bar */
+.boa-topbar{
+  background:#fff;padding:10px 16px 0;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid #ddd;
+}
+.boa-logo-area{display:flex;align-items:center;gap:0px;padding-bottom:10px;cursor:pointer;}
+
+/* Exact BOA wordmark with flag stripes */
+.boa-wordmark-wrap{display:flex;align-items:center;gap:0;}
+.boa-wordmark{
+  font-size:1.08rem;font-weight:900;color:#012169;letter-spacing:-0.2px;
+  font-family:'Times New Roman',Georgia,serif;
+  line-height:1;
+}
+/* Flag — 3 diagonal red stripes mimicking BOA logo */
+.boa-flag-svg{margin-left:6px;flex-shrink:0;}
+
+.boa-login-tab{
+  font-size:1rem;color:#555;font-weight:400;padding-bottom:10px;
+  border-bottom:none;font-family:Arial,sans-serif;
+}
+
+/* FDIC bar */
+.boa-fdic-bar{
+  background:#f8f8f8;border-bottom:1px solid #e0e0e0;
+  padding:4px 16px;font-size:0.62rem;color:#555;
+  display:flex;align-items:center;justify-content:flex-end;gap:6px;
+}
+.boa-fdic-logo{
+  background:#012169;color:#fff;font-size:0.55rem;font-weight:900;
+  padding:2px 5px;border-radius:2px;letter-spacing:0.5px;font-family:Arial,sans-serif;
+}
+
+/* Red banner */
+.boa-red-banner{
+  background:var(--boa-red);color:#fff;
+  padding:15px 20px;
+  font-size:1.18rem;font-weight:400;font-family:Arial,sans-serif;
+}
+
+/* Form area */
+.boa-form-area{
+  flex:1;background:#fff;padding:28px 20px 20px;max-width:560px;width:100%;
+}
+.boa-field-label{
+  font-size:0.93rem;font-weight:400;color:#111;
+  margin-bottom:7px;display:block;font-family:Arial,sans-serif;
+}
+.boa-input{
+  width:100%;max-width:290px;padding:8px 10px;
+  border:2px solid #333;border-radius:0;
+  font-size:0.95rem;font-family:Arial,sans-serif;
+  display:block;background:#fff;
+  transition:border-color 0.2s;
+}
+.boa-input:focus{outline:none;border-color:#012169;box-shadow:0 0 0 2px rgba(1,33,105,0.12);}
+.boa-save-row{
+  display:flex;align-items:center;gap:8px;margin:9px 0 24px;
+}
+.boa-checkbox{width:16px;height:16px;accent-color:#012169;cursor:pointer;}
+.boa-save-label{font-size:0.82rem;color:#333;display:flex;align-items:center;gap:6px;font-family:Arial,sans-serif;}
+.boa-help-icon{
+  width:18px;height:18px;border-radius:50%;background:#012169;color:#fff;
+  font-size:0.65rem;font-weight:900;display:inline-flex;align-items:center;justify-content:center;
+  cursor:pointer;flex-shrink:0;
+}
+.boa-forgot{
+  display:block;color:#0066cc;font-size:0.83rem;margin:10px 0 22px;
+  text-decoration:none;cursor:pointer;font-family:Arial,sans-serif;
+}
+.boa-forgot:hover{text-decoration:underline;}
+
+/* Exact BOA Log In button — blue with lock icon */
+.boa-login-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#1c69d3;color:#fff;border:none;
+  padding:11px 24px;font-size:0.93rem;font-weight:400;
+  font-family:Arial,sans-serif;cursor:pointer;border-radius:4px;
+  transition:background 0.2s;letter-spacing:0.2px;
+}
+.boa-login-btn:hover{background:#155cb8;}
+.boa-lock-icon{font-size:0.88rem;}
+
+.boa-err{
+  color:#c0001a;font-size:0.8rem;background:#fff5f5;border:1px solid #f5c2c7;
+  padding:10px 14px;border-radius:4px;
+  margin-top:14px;display:none;font-weight:400;line-height:1.5;
+  font-family:Arial,sans-serif;max-width:290px;
+}
+
+/* BOA footer — grey area */
+.boa-footer{
+  background:#e8e8e8;padding:16px 20px 20px;border-top:1px solid #ccc;
+  margin-top:auto;
+}
+.boa-secure-row{
+  display:flex;align-items:center;gap:8px;margin-bottom:12px;
+}
+.boa-secure-icon{font-size:0.95rem;color:#444;}
+.boa-secure-text{font-size:0.78rem;font-weight:700;color:#333;font-family:Arial,sans-serif;}
+.boa-footer-links{
+  display:flex;gap:0;flex-wrap:wrap;margin-bottom:10px;align-items:center;
+}
+.boa-footer-links a{
+  font-size:0.73rem;color:#0066cc;text-decoration:none;cursor:pointer;
+  padding-right:10px;margin-right:10px;border-right:1px solid #888;
+  font-family:Arial,sans-serif;line-height:1.6;
+}
+.boa-footer-links a:last-child{border-right:none;margin-right:0;padding-right:0;}
+.boa-footer-links a:hover{text-decoration:underline;}
+
+/* Privacy Choices badge (teal toggle icon) */
+.boa-privacy-badge{
+  display:inline-flex;align-items:center;gap:3px;
+  background:#00837f;color:#fff;font-size:0.52rem;font-weight:700;
+  padding:2px 6px;border-radius:10px;vertical-align:middle;margin-left:3px;
+}
+
+.boa-footer-legal{font-size:0.65rem;color:#555;line-height:1.7;font-family:Arial,sans-serif;}
+.boa-footer-legal a{color:#0066cc;text-decoration:none;cursor:pointer;}
+.boa-footer-legal a:hover{text-decoration:underline;}
+
+/* ═══════════════════════════════
+   APP SHELL
+═══════════════════════════════ */
+#appShell{display:none;min-height:100vh;flex-direction:column;background:#f0f2f8;}
+
+/* TOP NAV */
+.top-nav{
+  background:#fff;height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px;border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:600;box-shadow:0 1px 4px rgba(0,0,0,0.08);
+}
+.tn-left{display:flex;align-items:center;gap:10px;}
+.tn-ham{background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--text);padding:4px;display:none;}
+.tn-logo-wrap{display:flex;align-items:center;gap:8px;}
+#navLogo{height:36px;width:auto;object-fit:contain;cursor:pointer;border-radius:6px;}
+.tn-brand{display:flex;flex-direction:column;}
+#navBrandName{font-size:1rem;font-weight:900;color:var(--blue);letter-spacing:0.5px;line-height:1.1;}
+.tn-tagline{font-size:0.58rem;color:var(--muted);font-weight:500;}
+.tn-right{display:flex;align-items:center;gap:14px;}
+.tn-notif{position:relative;background:none;border:none;cursor:pointer;font-size:1.3rem;color:var(--text);}
+.tn-badge{position:absolute;top:-4px;right:-5px;background:var(--red);color:#fff;font-size:0.52rem;font-weight:800;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid #fff;}
+.tn-avatar{width:38px;height:38px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:0.82rem;font-weight:800;color:#fff;cursor:pointer;}
+
+/* LAYOUT */
+.app-body{display:flex;flex:1;min-height:calc(100vh - 60px);}
+
+/* SIDEBAR */
+.sidebar{width:260px;background:#fff;border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto;}
+.sb-header{background:var(--blue);padding:20px 18px 16px;color:#fff;}
+.sb-close{display:none;float:right;background:rgba(255,255,255,0.15);border:none;color:#fff;width:28px;height:28px;border-radius:50%;font-size:0.9rem;cursor:pointer;align-items:center;justify-content:center;}
+.sb-title{font-size:1.05rem;font-weight:800;letter-spacing:0.5px;margin-bottom:4px;}
+.sb-user{font-size:0.7rem;opacity:0.75;font-weight:500;}
+.sb-nav{flex:1;padding:8px 0;}
+.sbi{display:flex;align-items:center;gap:12px;padding:11px 18px;cursor:pointer;font-size:0.82rem;font-weight:600;color:var(--text);border-left:3px solid transparent;transition:all 0.15s;}
+.sbi:hover{background:#f0f4ff;color:var(--blue);border-left-color:var(--blue);}
+.sbi.active{background:#eff4ff;color:var(--blue);border-left-color:var(--blue);font-weight:700;}
+.sbi .si{font-size:1rem;width:22px;text-align:center;flex-shrink:0;}
+.sb-logout{padding:14px 18px;border-top:1px solid var(--border);display:flex;align-items:center;gap:10px;cursor:pointer;color:var(--red);font-size:0.82rem;font-weight:700;}
+.sb-logout:hover{background:#fff5f5;}
+
+/* MAIN */
+.main{flex:1;overflow-y:auto;padding:22px 22px 40px;}
+.page{display:none;}
+.page.active{display:block;}
+
+/* DASHBOARD */
+.dash-top{margin-bottom:20px;}
+.dash-greeting{font-size:1.05rem;color:var(--muted);font-weight:400;margin-bottom:2px;}
+.dash-name{font-size:1.6rem;font-weight:900;color:var(--text);}
+.dash-lastlogin{font-size:0.68rem;color:var(--muted);margin-top:4px;font-weight:500;}
+
+.acc-scroll{display:flex;gap:14px;overflow-x:auto;padding-bottom:6px;margin-bottom:20px;}
+.acc-tile{min-width:240px;border-radius:16px;padding:22px 20px;flex-shrink:0;position:relative;overflow:hidden;cursor:pointer;}
+.acc-tile.primary{background:linear-gradient(135deg,#1a3c8f 0%,#2952c4 100%);color:#fff;}
+.acc-tile.secondary,.acc-tile.tertiary{background:#fff;border:1.5px solid var(--border);color:var(--text);}
+.acc-tile::after{content:'G';position:absolute;right:-18px;top:50%;transform:translateY(-50%);font-size:5.5rem;font-weight:900;opacity:0.05;color:inherit;font-family:Arial,sans-serif;}
+.at-label{font-size:0.72rem;font-weight:700;opacity:0.8;}
+.at-num{font-size:0.68rem;font-weight:500;opacity:0.65;margin-top:2px;}
+.at-bal-label{font-size:0.62rem;font-weight:600;opacity:0.7;margin-top:14px;text-transform:uppercase;letter-spacing:0.5px;}
+.at-bal{font-size:1.65rem;font-weight:900;margin:4px 0 16px;letter-spacing:-0.5px;}
+.acc-tile.primary .at-bal{color:#fff;}
+.acc-tile.secondary .at-bal,.acc-tile.tertiary .at-bal{color:var(--blue);}
+.at-row{display:flex;gap:10px;}
+.at-btn{padding:8px 16px;border-radius:8px;font-size:0.72rem;font-weight:700;font-family:inherit;cursor:pointer;border:none;transition:all 0.15s;}
+.acc-tile.primary .at-btn{background:rgba(255,255,255,0.2);color:#fff;border:1px solid rgba(255,255,255,0.3);}
+.acc-tile.secondary .at-btn,.acc-tile.tertiary .at-btn{background:var(--blue);color:#fff;}
+.at-more{background:none;color:inherit;opacity:0.7;font-size:0.72rem;font-weight:600;cursor:pointer;border:none;}
+
+.qa-row{display:flex;gap:8px;margin-bottom:24px;overflow-x:auto;padding-bottom:4px;}
+.qa-item{display:flex;flex-direction:column;align-items:center;gap:7px;flex-shrink:0;cursor:pointer;}
+.qa-circle{width:52px;height:52px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:1.15rem;color:#fff;transition:transform 0.15s;}
+.qa-item:hover .qa-circle{transform:scale(1.08);}
+.qa-label{font-size:0.66rem;font-weight:700;color:var(--text);white-space:nowrap;}
+
+.sh{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+.sh h3{font-size:0.9rem;font-weight:800;color:var(--text);}
+.sh-link{font-size:0.72rem;color:var(--blue);font-weight:700;cursor:pointer;}
+
+.tx-card{background:#fff;border-radius:14px;border:1px solid var(--border);overflow:hidden;}
+.tx-row{display:flex;align-items:center;gap:14px;padding:14px 18px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.12s;}
+.tx-row:last-child{border-bottom:none;}
+.tx-row:hover{background:#f9fafb;}
+.tx-ico{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.95rem;font-weight:700;flex-shrink:0;}
+.tx-info{flex:1;min-width:0;}
+.tx-name{font-size:0.84rem;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.tx-date{font-size:0.66rem;color:var(--muted);margin-top:2px;font-weight:500;}
+.tx-r{text-align:right;flex-shrink:0;}
+.tx-amt{font-size:0.86rem;font-weight:800;}
+.tx-amt.cr{color:var(--green);}
+.tx-amt.dr{color:var(--red);}
+.tx-type{font-size:0.62rem;font-weight:700;margin-top:2px;}
+.tx-type.cr{color:var(--green);}
+.tx-type.dr{color:var(--red);}
+
+/* TRANSFER */
+.page-header{display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+.back-btn{width:32px;height:32px;border-radius:50%;background:var(--light);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:0.9rem;color:var(--blue);font-weight:800;flex-shrink:0;}
+.page-header h2{font-size:1rem;font-weight:900;color:var(--blue);}
+.tf-card{background:#fff;border-radius:14px;border:1px solid var(--border);padding:24px;max-width:540px;}
+.tf-section-label{font-size:0.7rem;font-weight:700;color:var(--text);margin-bottom:6px;letter-spacing:0.3px;}
+.tf-acc-row{background:var(--light);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:14px;display:flex;align-items:center;gap:12px;}
+.tf-acc-icon{width:38px;height:38px;border-radius:10px;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+.tf-acc-info{flex:1;}
+.tf-acc-sub{font-size:0.7rem;color:var(--muted);font-weight:500;}
+.tf-acc-name{font-size:0.85rem;font-weight:700;color:var(--text);}
+.tf-acc-bal{font-size:0.75rem;font-weight:700;color:var(--blue);margin-left:auto;flex-shrink:0;}
+.tf-chevron{color:var(--muted);font-size:0.8rem;margin-left:6px;}
+.tf-amount-wrap{display:flex;align-items:center;border:1.5px solid var(--border);border-radius:10px;overflow:hidden;background:#fff;margin-bottom:14px;}
+.tf-dollar{padding:13px 14px;font-size:0.95rem;font-weight:700;color:var(--muted);background:var(--light);border-right:1px solid var(--border);}
+.tf-amount-input{flex:1;padding:13px 14px;border:none;outline:none;font-size:1rem;font-weight:700;font-family:inherit;background:#fff;}
+.tf-desc-input{width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:0.88rem;font-family:inherit;background:#fff;margin-bottom:20px;}
+.tf-desc-input:focus{outline:none;border-color:var(--blue);}
+.tf-submit{width:100%;padding:15px;background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:0.92rem;font-weight:800;font-family:inherit;letter-spacing:1px;cursor:pointer;transition:background 0.2s;}
+.tf-submit:hover{background:var(--blue-dark);}
+
+/* ACCOUNT SETTINGS */
+.settings-wrap{max-width:500px;}
+.settings-profile-card{background:#fff;border-radius:14px;border:1px solid var(--border);padding:28px 22px 16px;margin-bottom:16px;text-align:center;}
+.sp-avatar{width:80px;height:80px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:1.8rem;font-weight:900;color:#fff;margin:0 auto 12px;position:relative;cursor:pointer;}
+.sp-edit{position:absolute;bottom:0;right:0;width:24px;height:24px;background:#2952c4;border-radius:50%;border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-size:0.6rem;cursor:pointer;}
+.sp-name{font-size:1.1rem;font-weight:800;color:var(--text);}
+.sp-email{font-size:0.72rem;color:var(--muted);margin-top:3px;}
+
+/* Profile edit button */
+.sp-edit-btn{
+  margin:14px auto 4px;display:inline-block;
+  padding:8px 22px;background:var(--blue);color:#fff;border:none;border-radius:8px;
+  font-size:0.78rem;font-weight:700;font-family:inherit;cursor:pointer;letter-spacing:0.5px;
+}
+.sp-edit-btn:hover{background:var(--blue-dark);}
+
+.settings-section{background:#fff;border-radius:14px;border:1px solid var(--border);overflow:hidden;margin-bottom:14px;}
+.ss-row{display:flex;align-items:center;padding:15px 18px;border-bottom:1px solid var(--border);gap:14px;cursor:pointer;transition:background 0.15s;}
+.ss-row:hover{background:#f9fafb;}
+.ss-row:last-child{border-bottom:none;}
+.ss-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+.ss-info{flex:1;}
+.ss-label{font-size:0.82rem;font-weight:700;color:var(--text);}
+.ss-val{font-size:0.72rem;color:var(--muted);margin-top:2px;}
+.ss-val.enabled{color:#16a34a;font-weight:700;}
+.ss-chevron{color:#9ca3af;font-size:0.85rem;flex-shrink:0;}
+.tog{width:46px;height:26px;border-radius:13px;background:#d1d5db;position:relative;cursor:pointer;transition:background 0.2s;flex-shrink:0;}
+.tog.on{background:#16a34a;}
+.tog::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform 0.2s;box-shadow:0 1px 4px rgba(0,0,0,0.2);}
+.tog.on::after{transform:translateX(20px);}
+.settings-logout{background:#fff;border-radius:14px;border:1px solid #fecaca;overflow:hidden;margin-bottom:14px;}
+.sl-row{padding:14px 18px;display:flex;align-items:center;gap:12px;cursor:pointer;color:var(--red);font-size:0.85rem;font-weight:700;}
+.sl-row:hover{background:#fff5f5;}
+
+/* Settings action buttons inside rows */
+.ss-action-btn{
+  padding:7px 14px;background:var(--blue);color:#fff;border:none;border-radius:7px;
+  font-size:0.72rem;font-weight:700;font-family:inherit;cursor:pointer;
+  white-space:nowrap;flex-shrink:0;transition:background 0.15s;
+}
+.ss-action-btn:hover{background:var(--blue-dark);}
+.ss-action-btn.danger{background:#dc2626;}
+.ss-action-btn.danger:hover{background:#b91c1c;}
+
+/* PROCESSING MODAL */
+#procModal{display:none;position:fixed;inset:0;z-index:9900;background:rgba(0,10,40,0.88);backdrop-filter:blur(8px);align-items:center;justify-content:center;}
+#procModal.show{display:flex;}
+.proc-box{background:#fff;border-radius:20px;padding:50px 36px 40px;text-align:center;max-width:360px;width:90%;box-shadow:0 40px 80px rgba(0,0,0,0.5);}
+.proc-spinner{width:56px;height:56px;border:5px solid #f0f0f0;border-top:5px solid var(--blue);border-radius:50%;animation:spin 0.85s linear infinite;margin:0 auto 22px;}
+.proc-title{font-size:1.05rem;font-weight:900;color:var(--blue);margin-bottom:8px;}
+.proc-sub{font-size:0.76rem;color:var(--muted);line-height:1.6;}
+.res-icon{font-size:3.8rem;margin-bottom:16px;}
+.res-title{font-size:1rem;font-weight:900;color:var(--red);letter-spacing:0.5px;margin-bottom:10px;}
+.res-hr{border:none;border-top:1px solid var(--border);margin:16px 0;}
+.res-msg{font-size:0.8rem;color:var(--text);font-weight:600;line-height:1.8;margin-bottom:22px;}
+.res-close{width:100%;padding:14px;background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:0.9rem;font-weight:800;font-family:inherit;cursor:pointer;}
+
+/* CFI MODAL — Contact Financial Institution */
+#cfiModal{display:none;position:fixed;inset:0;z-index:9800;background:rgba(0,10,40,0.82);backdrop-filter:blur(8px);align-items:center;justify-content:center;}
+#cfiModal.show{display:flex;}
+.cfi-box{background:#fff;border-radius:16px;padding:40px 32px;text-align:center;max-width:340px;width:90%;box-shadow:0 30px 70px rgba(0,0,0,0.45);animation:slideUp 0.25s ease;}
+.cfi-icon{font-size:3rem;margin-bottom:14px;}
+.cfi-title{font-size:1rem;font-weight:900;color:var(--blue);margin-bottom:10px;letter-spacing:0.5px;}
+.cfi-msg{font-size:0.8rem;color:var(--muted);line-height:1.8;margin-bottom:22px;}
+.cfi-close{width:100%;padding:13px;background:var(--blue);color:#fff;border:none;border-radius:9px;font-size:0.88rem;font-weight:800;font-family:inherit;cursor:pointer;}
+
+/* SYNC BANNER */
+#syncBanner{position:fixed;top:0;left:0;right:0;z-index:8000;background:#15803d;color:#fff;text-align:center;font-size:0.74rem;font-weight:700;letter-spacing:0.5px;padding:10px;display:none;box-shadow:0 2px 8px rgba(0,0,0,0.2);}
+#syncBanner.show{display:block;animation:fadeIn 0.3s;}
+
+
+/* ADMIN LOGIN */
+#adminLoginOverlay{display:none;position:fixed;inset:0;z-index:9998;background:rgba(0,0,20,0.85);backdrop-filter:blur(12px);align-items:center;justify-content:center;}
+#adminLoginOverlay.show{display:flex;}
+.albox{background:#fff;border-radius:16px;padding:44px 36px;max-width:330px;width:90%;border-top:8px solid var(--gold);box-shadow:0 30px 80px rgba(0,0,0,0.55);text-align:center;animation:slideUp 0.25s ease;}
+.albox-icon{width:52px;height:52px;background:var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:1.3rem;}
+.albox h2{color:var(--blue);font-size:0.95rem;letter-spacing:2px;margin:0 0 5px;}
+.albox p{color:#9ca3af;font-size:0.7rem;margin:0 0 20px;}
+.albox input{width:100%;padding:12px;border:1.5px solid var(--border);border-radius:8px;font-size:1.1rem;box-sizing:border-box;margin-bottom:14px;text-align:center;letter-spacing:8px;font-weight:700;font-family:inherit;}
+.albox input:focus{outline:none;border-color:var(--blue);}
+.albox-btn{width:100%;padding:13px;background:var(--blue);color:#fff;border:none;border-radius:8px;font-size:0.9rem;font-weight:800;cursor:pointer;font-family:inherit;}
+.albox-btn:hover{background:var(--blue-dark);}
+.albox-err{color:var(--red);font-size:0.72rem;margin:-6px 0 10px;display:none;}
+.albox-cancel{display:block;margin-top:12px;font-size:0.7rem;color:#9ca3af;cursor:pointer;text-decoration:underline;}
+
+/* ADMIN PANEL */
+#adminPanel{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,10,35,0.9);backdrop-filter:blur(14px);align-items:flex-start;justify-content:center;overflow-y:auto;padding:24px 14px 50px;}
+#adminPanel.show{display:flex;}
+.adm-card{background:#fff;border-radius:16px;width:100%;max-width:620px;box-shadow:0 40px 100px rgba(0,0,0,0.6);overflow:hidden;animation:slideUp 0.3s ease;}
+.adm-hdr{background:var(--blue);padding:20px 26px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:5px solid var(--gold);}
+.adm-hdr h2{color:#fff;font-size:0.9rem;letter-spacing:2px;margin:0;}
+.adm-hdr .adm-sub{color:rgba(255,255,255,0.65);font-size:0.65rem;margin-top:4px;}
+.adm-x{background:rgba(255,255,255,0.15);border:none;color:#fff;width:30px;height:30px;border-radius:50%;font-size:0.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.adm-x:hover{background:rgba(255,255,255,0.28);}
+.adm-body{padding:24px;}
+#fbBadge{display:inline-flex;align-items:center;gap:7px;font-size:0.64rem;font-weight:700;padding:5px 12px;border-radius:20px;margin-bottom:18px;background:#dcfce7;color:#15803d;border:1px solid #86efac;transition:all 0.3s;}
+#fbBadge.offline{background:#fff7ed;color:#c2410c;border-color:#fdba74;}
+#fbBadge.saving{background:#dbeafe;color:#1d4ed8;border-color:#93c5fd;}
+#fbDot{width:8px;height:8px;border-radius:50%;background:#22c55e;flex-shrink:0;}
+#fbBadge.offline #fbDot{background:#f97316;}
+#fbBadge.saving #fbDot{background:#3b82f6;animation:pulse 0.8s infinite;}
+.adm-sec{background:#f9fafb;border:1.5px solid var(--border);border-radius:10px;padding:18px 20px;margin-bottom:16px;}
+.adm-sec-title{font-size:0.64rem;font-weight:800;color:var(--blue);letter-spacing:2px;text-transform:uppercase;margin-bottom:13px;display:flex;align-items:center;gap:8px;}
+.adm-sec-title::before{content:'';display:inline-block;width:4px;height:14px;background:var(--gold);border-radius:2px;}
+.af{margin-bottom:13px;}
+.af label{display:block;font-size:0.65rem;font-weight:700;color:#6b7280;margin-bottom:5px;}
+.af input[type=text],.af input[type=url]{width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:7px;font-size:0.86rem;box-sizing:border-box;background:#fff;font-family:inherit;transition:border 0.2s;}
+.af input:focus{outline:none;border-color:var(--blue);}
+.logo-row{display:flex;align-items:center;gap:12px;margin-top:10px;}
+.logo-box{width:72px;height:56px;border:2px dashed #d1d5db;border-radius:8px;display:flex;align-items:center;justify-content:center;background:#fafafa;overflow:hidden;flex-shrink:0;}
+.logo-box img{max-width:68px;max-height:52px;object-fit:contain;}
+.upload-lbl{padding:8px 13px;background:#eff4ff;border:1.5px solid #c7d7fe;border-radius:7px;font-size:0.72rem;font-weight:700;color:var(--blue);cursor:pointer;display:inline-block;}
+.upload-lbl:hover{background:#dbe9ff;}
+#logoFileInput{display:none;}
+.abtn{width:100%;padding:12px;background:var(--blue);color:#fff;border:none;border-radius:8px;font-size:0.86rem;font-weight:800;cursor:pointer;letter-spacing:1px;margin-top:4px;transition:all 0.2s;font-family:inherit;}
+.abtn:hover:not(:disabled){background:var(--blue-dark);}
+.abtn:disabled{background:#9ca3af;cursor:not-allowed;}
+.abtn.gold{background:#c59a2a;}
+.abtn.gold:hover:not(:disabled){background:#a37e1e;}
+.atoast{display:none;padding:9px 13px;border-radius:7px;font-size:0.74rem;font-weight:700;margin-top:10px;text-align:center;}
+.atoast.ok{background:#dcfce7;border:1.5px solid #4ade80;color:#15803d;}
+.atoast.err{background:#fee2e2;border:1.5px solid #f87171;color:#b91c1c;}
+.atoast.show{display:block;animation:fadeIn 0.3s;}
+
+/* ADMIN TABS */
+.adm-tab{padding:7px 13px;border:1.5px solid var(--border);border-radius:20px;font-size:0.68rem;font-weight:700;font-family:inherit;background:#fff;color:var(--text);cursor:pointer;transition:all 0.15s;white-space:nowrap;}
+.adm-tab:hover{border-color:var(--blue);color:var(--blue);}
+.adm-tab.active{background:var(--blue);color:#fff;border-color:var(--blue);}
+.adm-tab-content{display:none;}
+
+/* FONT GRID */
+.font-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:13px;}
+@media(max-width:480px){.font-grid{grid-template-columns:1fr;}}
+.fc{border:2px solid var(--border);border-radius:9px;padding:11px 13px;cursor:pointer;background:#fff;transition:all 0.18s;position:relative;}
+.fc:hover{border-color:var(--blue);background:#eff4ff;}
+.fc.sel{border-color:var(--blue);background:#eff4ff;box-shadow:0 0 0 3px rgba(26,60,143,0.12);}
+.fc-sample{font-size:1.15rem;font-weight:700;color:#111;line-height:1.2;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.fc-meta{display:flex;justify-content:space-between;align-items:center;}
+.fc-name{font-size:0.58rem;font-weight:800;color:#9ca3af;letter-spacing:1px;text-transform:uppercase;}
+.fc-tag{font-size:0.56rem;font-weight:700;padding:2px 6px;border-radius:8px;}
+.fc-tag.serif{background:#fef9c3;color:#854d0e;}
+.fc-tag.sans{background:#dcfce7;color:#166534;}
+.fc-tag.display{background:#cffafe;color:#155e75;}
+.fc-tag.condensed{background:#f3e8ff;color:#6b21a8;}
+.fc-check{position:absolute;top:7px;right:8px;width:16px;height:16px;border-radius:50%;background:var(--blue);color:#fff;font-size:0.56rem;display:none;align-items:center;justify-content:center;}
+.fc.sel .fc-check{display:flex;}
+#fpBar{background:linear-gradient(135deg,#0d1e5c,#1a3c8f);border-radius:8px;padding:13px 16px;margin-bottom:13px;text-align:center;}
+.fpb-lbl{font-size:0.58rem;color:rgba(255,255,255,0.5);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;font-family:sans-serif;}
+#fpSample{font-size:1.3rem;font-weight:700;color:var(--gold);letter-spacing:1px;}
+.adm-footer{background:#f9fafb;padding:13px 26px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);flex-wrap:wrap;gap:8px;}
+.adm-footer span{font-size:0.65rem;color:#9ca3af;}
+.adm-close-btn{padding:8px 16px;background:var(--red);color:#fff;border:none;border-radius:6px;font-size:0.7rem;font-weight:800;cursor:pointer;}
+
+/* BOTTOM NAV */
+.bottom-nav{display:none;background:#fff;border-top:1px solid var(--border);padding:6px 0 10px;position:sticky;bottom:0;z-index:500;flex-shrink:0;}
+.bn-row{display:flex;justify-content:space-around;}
+.bni{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:0.6rem;font-weight:700;color:var(--muted);cursor:pointer;padding:4px 10px;border-radius:8px;transition:color 0.15s;}
+.bni.active,.bni:hover{color:var(--blue);}
+.bni-ic{font-size:1.25rem;}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .sidebar{display:none;position:fixed;top:0;left:0;bottom:0;z-index:700;width:270px;box-shadow:4px 0 20px rgba(0,0,0,0.18);}
+  .sidebar.open{display:flex;}
+  .sb-close{display:flex !important;}
+  .tn-ham{display:flex;}
+  .bottom-nav{display:block;}
+  .main{padding:16px 14px 28px;}
+  .tf-card,.settings-wrap{max-width:100%;}
+  .acc-tile{min-width:220px;}
+  .boa-form-area{padding:20px 16px;}
+}
+
+@keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+@keyframes slideUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+</style>
+</head>
+<body>
+
+<div id="syncBanner">✅ Portal branding updated — all connected users refreshed instantly</div>
+
+<!-- ═══════════════════════════════
+     BOA LOGIN PAGE — Pixel Perfect
+═══════════════════════════════ -->
+<div id="loginPage">
+
+  <!-- BOA Top bar -->
+  <div class="boa-topbar">
+    <div class="boa-logo-area" id="boaLogoClickZone" onclick="handleLogoClick()">
+      <div class="boa-wordmark-wrap">
+        <span class="boa-wordmark">BANK OF AMERICA</span>
+        <!-- SVG flag stripes identical to real BOA logo -->
+        <svg class="boa-flag-svg" width="28" height="22" viewBox="0 0 28 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g>
+            <!-- 3 red diagonal parallelogram stripes, stacked -->
+            <polygon points="4,0 28,0 24,7 0,7" fill="#c0001a"/>
+            <polygon points="2,9 26,9 22,16 -2,16" fill="#c0001a"/>
+            <polygon points="0,18 24,18 20,25 -4,25" fill="#c0001a"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <span class="boa-login-tab">Log In</span>
+  </div>
+
+  <!-- FDIC bar -->
+  <div class="boa-fdic-bar">
+    <span class="boa-fdic-logo">FDIC</span>
+    <span>FDIC-Insured · Backed by full faith and credit of the U.S. Government</span>
+  </div>
+
+  <!-- ONE-TIME LOGIN WARNING — shown when kicked by another device -->
+  <div id="_loginWarn" style="display:none;margin:10px 16px 0;padding:13px 16px;background:#fff8e1;border:1.5px solid #fbbf24;border-radius:10px;align-items:flex-start;gap:10px;max-width:560px;">
+    <span style="font-size:1.3rem;flex-shrink:0;">⚠️</span>
+    <div>
+      <div style="font-size:0.82rem;font-weight:800;color:#92400e;margin-bottom:3px;">One-Time Access Warning</div>
+      <div id="_loginWarnMsg" style="font-size:0.76rem;color:#78350f;line-height:1.6;">This login can only be accessed once. Your session was ended because the same account was opened on another device.</div>
+    </div>
+  </div>
+
+  <!-- Red banner -->
+  <div class="boa-red-banner">Log In to Online Banking</div>
+
+  <!-- Form -->
+  <div class="boa-form-area">
+    <div style="margin-bottom:22px;">
+      <label class="boa-field-label" for="userIn">User ID</label>
+      <input type="text" class="boa-input" id="userIn" autocomplete="off" onkeydown="if(event.key==='Enter')doLogin();" >
+      <div class="boa-save-row">
+        <input type="checkbox" class="boa-checkbox" id="saveId">
+        <label class="boa-save-label" for="saveId">
+          Save this User ID
+          <span class="boa-help-icon" title="Save your User ID for faster login">?</span>
+        </label>
+      </div>
+    </div>
+
+    <div style="margin-bottom:22px;">
+      <label class="boa-field-label" for="passIn">Password</label>
+      <input type="password" class="boa-input" id="passIn" onkeydown="if(event.key==='Enter')doLogin()">
+      <a class="boa-forgot" onclick="openPinModal()">Forgot your Password?</a>
+    </div>
+
+    <button class="boa-login-btn" onclick="doLogin()">
+      <span class="boa-lock-icon">🔒</span> Log In
+    </button>
+
+    <div class="boa-err" id="loginErr">
+      We're unable to process your request. Please check your User ID and Password and try again.
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="boa-footer">
+    <div class="boa-secure-row">
+      <span class="boa-secure-icon">🔒</span>
+      <span class="boa-secure-text">Secure area</span>
+    </div>
+    <div class="boa-footer-links">
+      <a onclick="showToastMsg('🔒 Privacy Policy: finportal.com/privacy')">Privacy</a>
+      <a onclick="showToastMsg('🛡️ Security Policy: finportal.com/security')">Security</a>
+      <a onclick="showToastMsg('Your privacy choices are managed in Account Settings.')">Your Privacy Choices <span class="boa-privacy-badge">✓✗</span></a>
+    </div>
+    <div class="boa-footer-legal">
+      Bank of America, N.A. Member FDIC. <a onclick="showToastMsg('Equal Housing Lender — NMLS #399802')">Equal Housing Lender</a> 🏠<br>
+      © 2026 Bank of America Corporation.
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════
+     APP SHELL
+═══════════════════════════════ -->
+<div id="appShell">
+
+  <!-- TOP NAV -->
+  <div class="top-nav">
+    <div class="tn-left">
+      <button class="tn-ham" onclick="toggleSidebar()">☰</button>
+      <div class="tn-logo-wrap">
+        <img id="navLogo" src="https://i.postimg.cc/FsYxj8H9/IMG-20260327-WA0009.jpg" alt="Logo" onclick="handleLogoClick()">
+        <div class="tn-brand">
+          <span id="navBrandName">FIN PORTAL</span>
+          <span class="tn-tagline">Your Security, Our Priority</span>
+        </div>
+      </div>
+    </div>
+    <div class="tn-right">
+      <button class="tn-notif" onclick="showPage('notifs')">🔔<span class="tn-badge" id="notifBadge">3</span></button>
+      <div class="tn-avatar" id="navAvatarEl" onclick="showPage('settings')">JD</div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex:1;min-height:calc(100vh - 60px);">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar" id="sidebar">
+      <div class="sb-header">
+        <button class="sb-close" id="sbClose" onclick="toggleSidebar()">✕</button>
+        <div class="sb-title">Menu</div>
+        <div class="sb-user" id="sbUser">John Doe</div>
+      </div>
+      <div class="sb-nav">
+        <div class="sbi active" id="nav-dashboard" onclick="showPage('dashboard')"><span class="si">🏠</span>Dashboard</div>
+        <div class="sbi" id="nav-accounts" onclick="showPage('accounts')"><span class="si">🏦</span>Accounts</div>
+        <div class="sbi" id="nav-transactions" onclick="showPage('transactions')"><span class="si">📋</span>Transactions</div>
+        <div class="sbi" id="nav-transfer" onclick="showPage('transfer')"><span class="si">↔️</span>Transfer</div>
+        <div class="sbi" id="nav-paybills" onclick="showPage('paybills')"><span class="si">🧾</span>Pay Bills</div>
+        <div class="sbi" id="nav-cards" onclick="showPage('cards')"><span class="si">💳</span>Cards</div>
+        <div class="sbi" id="nav-statements" onclick="showPage('statements')"><span class="si">📄</span>Statements</div>
+        <div class="sbi" id="nav-security" onclick="showPage('security')"><span class="si">🛡️</span>Security Center</div>
+        <div class="sbi" id="nav-settings" onclick="showPage('settings')"><span class="si">⚙️</span>Account Settings</div>
+        <div class="sbi" id="nav-notifs" onclick="showPage('notifs')"><span class="si">🔔</span>Notifications</div>
+        <div class="sbi" id="nav-help" onclick="showPage('help')"><span class="si">❓</span>Help &amp; Support</div>
+      </div>
+      <div class="sb-logout" onclick="doLogout()"><span style="font-size:1rem;">🚪</span>Logout</div>
+    </div>
+
+    <!-- MAIN -->
+    <div class="main" id="mainContent">
+
+      <!-- ── DASHBOARD ── -->
+      <div id="page-dashboard" class="page active">
+        <div class="dash-top">
+          <div class="dash-greeting">Good Morning,</div>
+          <div class="dash-name" id="dashName">John Doe 👋</div>
+          <div class="dash-lastlogin" id="dashLogin">Last login: May 14, 2026, 08:24 AM</div>
+        </div>
+
+        <div class="acc-scroll">
+          <div class="acc-tile primary" onclick="showPage('accounts')">
+            <div class="at-label">Checking Account</div>
+            <div class="at-num">•••• 5678</div>
+            <div class="at-bal-label">Available Balance</div>
+            <div class="at-bal">$12,430.20</div>
+            <div class="at-row">
+              <button class="at-btn" onclick="event.stopPropagation();showPage('accounts')">View Details</button>
+              <button class="at-more" onclick="event.stopPropagation();showPage('transactions')">••• More</button>
+            </div>
+          </div>
+          <div class="acc-tile secondary" onclick="showPage('accounts')">
+            <div class="at-label">Savings Account</div>
+            <div class="at-num">•••• 4321</div>
+            <div class="at-bal-label">Available Balance</div>
+            <div class="at-bal">$8,750.00</div>
+            <div class="at-row">
+              <button class="at-btn" onclick="event.stopPropagation();showPage('accounts')">View Details</button>
+            </div>
+          </div>
+          <div class="acc-tile tertiary" onclick="showPage('accounts')">
+            <div class="at-label">Business Account</div>
+            <div class="at-num">•••• 9876</div>
+            <div class="at-bal-label">Available Balance</div>
+            <div class="at-bal">$0.00</div>
+            <div class="at-row">
+              <button class="at-btn" onclick="event.stopPropagation();showPage('accounts')">View Details</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-row">
+          <div class="qa-item" onclick="showPage('transfer')"><div class="qa-circle">→</div><span class="qa-label">Transfer</span></div>
+          <div class="qa-item" onclick="showPage('paybills')"><div class="qa-circle">🧾</div><span class="qa-label">Pay Bills</span></div>
+          <div class="qa-item" onclick="showPage('accounts')"><div class="qa-circle">📥</div><span class="qa-label">Deposit</span></div>
+          <div class="qa-item" onclick="showPage('transactions')"><div class="qa-circle">📋</div><span class="qa-label">Transactions</span></div>
+          <div class="qa-item" onclick="showPage('cards')"><div class="qa-circle">💳</div><span class="qa-label">Cards</span></div>
+          <div class="qa-item" onclick="showPage('statements')"><div class="qa-circle">•••</div><span class="qa-label">More</span></div>
+        </div>
+
+        <div class="sh"><h3>Recent Transactions</h3><span class="sh-link" onclick="showPage('transactions')">See All</span></div>
+        <div class="tx-card">
+          <div class="tx-row" onclick="showPage('transactions')">
+            <div class="tx-ico" style="background:#1a1a1a;color:#fff;">A</div>
+            <div class="tx-info"><div class="tx-name">Amazon Purchase</div><div class="tx-date">May 14, 2026 · 09:14 AM</div></div>
+            <div class="tx-r"><div class="tx-amt dr">−$89.99</div><div class="tx-type dr">Debit</div></div>
+          </div>
+          <div class="tx-row" onclick="showPage('transactions')">
+            <div class="tx-ico" style="background:#16a34a;color:#fff;">$</div>
+            <div class="tx-info"><div class="tx-name">Salary Deposit</div><div class="tx-date">May 13, 2026 · 08:30 AM</div></div>
+            <div class="tx-r"><div class="tx-amt cr">+$3,200.00</div><div class="tx-type cr">Credit</div></div>
+          </div>
+          <div class="tx-row" onclick="showPage('transactions')">
+            <div class="tx-ico" style="background:#2563eb;color:#fff;">🏧</div>
+            <div class="tx-info"><div class="tx-name">ATM Withdrawal</div><div class="tx-date">May 12, 2026 · 07:45 PM</div></div>
+            <div class="tx-r"><div class="tx-amt dr">−$200.00</div><div class="tx-type dr">Debit</div></div>
+          </div>
+          <div class="tx-row" onclick="showPage('transactions')">
+            <div class="tx-ico" style="background:#e50914;color:#fff;font-size:0.75rem;font-weight:900;">N</div>
+            <div class="tx-info"><div class="tx-name">Netflix Subscription</div><div class="tx-date">May 12, 2026 · 06:20 PM</div></div>
+            <div class="tx-r"><div class="tx-amt dr">−$15.99</div><div class="tx-type dr">Debit</div></div>
+          </div>
+          <div class="tx-row" onclick="showPage('transactions')">
+            <div class="tx-ico" style="background:#f59e0b;color:#fff;">⚡</div>
+            <div class="tx-info"><div class="tx-name">Electricity Bill</div><div class="tx-date">May 11, 2026 · 11:15 AM</div></div>
+            <div class="tx-r"><div class="tx-amt dr">−$120.00</div><div class="tx-type dr">Debit</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── TRANSFER ── -->
+      <div id="page-transfer" class="page">
+        <div class="page-header">
+          <div class="back-btn" onclick="showPage('dashboard')">←</div>
+          <h2>Transfer Money</h2>
+          <span style="font-size:0.7rem;color:var(--muted);margin-left:auto;cursor:pointer;" onclick="showPage('settings')">⚙️</span>
+        </div>
+        <div class="tf-card">
+          <div class="tf-section-label">From</div>
+          <div class="tf-acc-row">
+            <div class="tf-acc-icon">🏦</div>
+            <div class="tf-acc-info">
+              <div class="tf-acc-sub">Checking Account •••• 5678</div>
+              <div class="tf-acc-name">Checking Account</div>
+            </div>
+            <div class="tf-acc-bal">$12,430.20</div>
+            <span class="tf-chevron">∨</span>
+          </div>
+          <div class="tf-section-label">To</div>
+          <div class="tf-acc-row">
+            <div class="tf-acc-icon">🏦</div>
+            <div class="tf-acc-info">
+              <div class="tf-acc-sub">Savings Account •••• 4321</div>
+              <div class="tf-acc-name">Savings Account</div>
+            </div>
+            <div class="tf-acc-bal">$8,750.00</div>
+            <span class="tf-chevron">∨</span>
+          </div>
+          <div class="tf-acc-row" style="margin-bottom:14px;cursor:default;opacity:0.5;">
+            <div class="tf-acc-icon" style="background:#6b7280;">🏛️</div>
+            <div class="tf-acc-info">
+              <div class="tf-acc-name">Other Bank / New Payee</div>
+              <div style="font-size:0.62rem;color:var(--muted);">Not available</div>
+            </div>
+            <span class="tf-chevron" style="margin-left:auto;">›</span>
+          </div>
+          <div class="tf-section-label">Amount</div>
+          <div class="tf-amount-wrap">
+            <span class="tf-dollar">$</span>
+            <input type="number" class="tf-amount-input" id="tfAmt" placeholder="0.00" min="1">
+          </div>
+          <div class="tf-section-label">Description <span style="color:#9ca3af;font-weight:400;">(Optional)</span></div>
+          <input type="text" class="tf-desc-input" id="tfDesc" placeholder="e.g. Rent payment">
+          <button class="tf-submit" onclick="startTransfer()">Continue</button>
+        </div>
+      </div>
+
+      <!-- ── ACCOUNT SETTINGS ── -->
+      <div id="page-settings" class="page">
+        <div class="page-header">
+          <div class="back-btn" onclick="showPage('dashboard')">←</div>
+          <h2>Account Settings</h2>
+        </div>
+        <div class="settings-wrap">
+
+          <!-- Profile Card -->
+          <div class="settings-profile-card">
+            <div class="sp-avatar" id="spAvatar">JD<div class="sp-edit">✏️</div></div>
+            <div class="sp-name" id="spName">John Doe</div>
+            <div class="sp-email" id="spEmail">johndoe@email.com</div>
+            <button class="sp-edit-btn" onclick="openEditProfile()">Request Profile Change</button>
+          </div>
+
+          <!-- Personal Information -->
+          <div class="settings-section">
+            <div class="ss-row">
+              <div class="ss-icon" style="background:#eff4ff;">👤</div>
+              <div class="ss-info"><div class="ss-label">Full Name</div><div class="ss-val" id="ssFullName">John Doe</div></div>
+              <button class="ss-action-btn" onclick="openEditProfile()">Request Change</button>
+            </div>
+            <div class="ss-row">
+              <div class="ss-icon" style="background:#fef9c3;">📧</div>
+              <div class="ss-info"><div class="ss-label">Email Address</div><div class="ss-val" id="ssEmail">johndoe@email.com</div></div>
+              <button class="ss-action-btn" onclick="openEditProfile()">Request Change</button>
+            </div>
+            <div class="ss-row">
+              <div class="ss-icon" style="background:#dcfce7;">📱</div>
+              <div class="ss-info"><div class="ss-label">Phone Number</div><div class="ss-val">(555) 123-4567</div></div>
+              <button class="ss-action-btn" onclick="openEditProfile()">Request Change</button>
+            </div>
+          </div>
+
+          <!-- Security -->
+          <div class="settings-section">
+            <div class="ss-row">
+              <div class="ss-icon" style="background:#fce7f3;">🔑</div>
+              <div class="ss-info"><div class="ss-label">Change PIN</div><div class="ss-val">••••••</div></div>
+              <button class="ss-action-btn" onclick="openPinModal()">Change PIN</button>
+            </div>
+            <div class="ss-row">
+              <div class="ss-icon" style="background:#fff7ed;">🔒</div>
+              <div class="ss-info"><div class="ss-label">Change Password</div><div class="ss-val">Last changed 30 days ago</div></div>
+              <button class="ss-action-btn" onclick="openPinModal()">Change</button>
+            </div>
+            <div class="ss-row">
+              <div class="ss-icon" style="background:#f0fdf4;">❓</div>
+              <div class="ss-info"><div class="ss-label">Security Questions</div><div class="ss-val">Manage your security questions</div></div>
+              <button class="ss-action-btn" onclick="showPage('security')">Manage</button>
+            </div>
+            <div class="ss-row">
+              <div class="ss-icon" style="background:#f3e8ff;">🛡️</div>
+              <div class="ss-info"><div class="ss-label">Two-Factor Authentication</div><div class="ss-val enabled">Enabled</div></div>
+              <button class="ss-action-btn" onclick="showPage('security')">Manage</button>
+            </div>
+            <div class="ss-row">
+              <div class="ss-icon" style="background:#eff4ff;">👁️</div>
+              <div class="ss-info"><div class="ss-label">Biometric Login</div><div class="ss-val enabled" id="bioVal">Enabled</div></div>
+              <div class="tog on" id="bioTog" onclick="toggleBio()"></div>
+            </div>
+          </div>
+
+          <!-- Preferences -->
+          <div class="settings-section">
+            <div class="ss-row">
+              <div class="ss-icon" style="background:#fef3c7;">🌐</div>
+              <div class="ss-info"><div class="ss-label">Language</div><div class="ss-val">English (US)</div></div>
+              <button class="ss-action-btn" onclick="showLangModal()">Change</button>
+            </div>
+            <div class="ss-row">
+              <div class="ss-icon" style="background:#e0f2fe;">🔔</div>
+              <div class="ss-info"><div class="ss-label">Notification Preferences</div><div class="ss-val">Push, Email, SMS</div></div>
+              <button class="ss-action-btn" onclick="showPage('notifs')">Manage</button>
+            </div>
+            <div class="ss-row">
+              <div class="ss-icon" style="background:#f0fdf4;">📄</div>
+              <div class="ss-info"><div class="ss-label">Paperless Statements</div><div class="ss-val enabled" id="paperlessVal">Enabled</div></div>
+              <div class="tog on" id="paperlessTog" onclick="togglePaperless()"></div>
+            </div>
+          </div>
+
+          <!-- Danger Zone -->
+          <div class="settings-section">
+            <div class="ss-row">
+              <div class="ss-icon" style="background:#fee2e2;">🚫</div>
+              <div class="ss-info"><div class="ss-label">Close Account</div><div class="ss-val" style="color:#dc2626;">Permanently close this account</div></div>
+              <button class="ss-action-btn danger" onclick="showCloseAccountModal()">Request</button>
+            </div>
+          </div>
+
+          <!-- Logout -->
+          <div class="settings-logout">
+            <div class="sl-row" onclick="doLogout()">
+              <span style="font-size:1rem;">🚪</span><span>Logout</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── ACCOUNTS PAGE ── -->
+      <div id="page-accounts" class="page">
+        <div class="page-header">
+          <div class="back-btn" onclick="showPage('dashboard')">←</div>
+          <h2>My Accounts</h2>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div style="background:#fff;border-radius:14px;border:1px solid var(--border);overflow:hidden;">
+            <div style="background:linear-gradient(135deg,#1a3c8f,#2952c4);padding:20px;color:#fff;">
+              <div style="font-size:0.7rem;font-weight:700;opacity:0.8;">CHECKING ACCOUNT</div>
+              <div style="font-size:0.68rem;opacity:0.6;margin:2px 0 16px;">•••• •••• •••• 5678</div>
+              <div style="font-size:0.6rem;font-weight:600;opacity:0.7;text-transform:uppercase;letter-spacing:0.5px;">Available Balance</div>
+              <div style="font-size:2rem;font-weight:900;margin:4px 0;">$12,430.20</div>
+              <div style="font-size:0.62rem;opacity:0.6;">Ledger Balance: $12,430.20</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid var(--border);">
+              <div style="padding:14px;text-align:center;border-right:1px solid var(--border);cursor:pointer;" onclick="showPage('transfer')"><div style="font-size:1.2rem;">→</div><div style="font-size:0.62rem;font-weight:700;color:var(--blue);margin-top:4px;">Transfer</div></div>
+              <div style="padding:14px;text-align:center;border-right:1px solid var(--border);cursor:pointer;" onclick="showPage('transactions')"><div style="font-size:1.2rem;">📋</div><div style="font-size:0.62rem;font-weight:700;color:var(--blue);margin-top:4px;">History</div></div>
+              <div style="padding:14px;text-align:center;cursor:pointer;" onclick="showPage('statements')"><div style="font-size:1.2rem;">📄</div><div style="font-size:0.62rem;font-weight:700;color:var(--blue);margin-top:4px;">Statements</div></div>
+            </div>
+          </div>
+          <div style="background:#fff;border-radius:14px;border:1px solid var(--border);overflow:hidden;">
+            <div style="background:linear-gradient(135deg,#064e3b,#065f46);padding:20px;color:#fff;">
+              <div style="font-size:0.7rem;font-weight:700;opacity:0.8;">SAVINGS ACCOUNT</div>
+              <div style="font-size:0.68rem;opacity:0.6;margin:2px 0 16px;">•••• •••• •••• 4321</div>
+              <div style="font-size:0.6rem;font-weight:600;opacity:0.7;text-transform:uppercase;letter-spacing:0.5px;">Available Balance</div>
+              <div style="font-size:2rem;font-weight:900;margin:4px 0;">$8,750.00</div>
+              <div style="font-size:0.62rem;opacity:0.6;">Interest Rate: 4.25% APY</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid var(--border);">
+              <div style="padding:14px;text-align:center;border-right:1px solid var(--border);cursor:pointer;" onclick="showPage('transfer')"><div style="font-size:1.2rem;">→</div><div style="font-size:0.62rem;font-weight:700;color:var(--blue);margin-top:4px;">Transfer</div></div>
+              <div style="padding:14px;text-align:center;border-right:1px solid var(--border);cursor:pointer;" onclick="showPage('transactions')"><div style="font-size:1.2rem;">📋</div><div style="font-size:0.62rem;font-weight:700;color:var(--blue);margin-top:4px;">History</div></div>
+              <div style="padding:14px;text-align:center;cursor:pointer;" onclick="showPage('statements')"><div style="font-size:1.2rem;">📄</div><div style="font-size:0.62rem;font-weight:700;color:var(--blue);margin-top:4px;">Statements</div></div>
+            </div>
+          </div>
+          <div style="background:#fff;border-radius:14px;border:1px solid var(--border);overflow:hidden;opacity:0.65;">
+            <div style="background:linear-gradient(135deg,#374151,#1f2937);padding:20px;color:#fff;">
+              <div style="font-size:0.7rem;font-weight:700;opacity:0.8;">BUSINESS ACCOUNT</div>
+              <div style="font-size:0.68rem;opacity:0.6;margin:2px 0 16px;">•••• •••• •••• 9876</div>
+              <div style="font-size:0.6rem;font-weight:600;opacity:0.7;text-transform:uppercase;letter-spacing:0.5px;">Available Balance</div>
+              <div style="font-size:2rem;font-weight:900;margin:4px 0;">$0.00</div>
+              <div style="font-size:0.62rem;opacity:0.6;">Account Inactive</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── TRANSACTIONS PAGE ── -->
+      <div id="page-transactions" class="page">
+        <div class="page-header">
+          <div class="back-btn" onclick="showPage('dashboard')">←</div>
+          <h2>Transactions</h2>
+        </div>
+        <div style="background:#fff;border-radius:12px;border:1px solid var(--border);padding:12px 16px;margin-bottom:14px;display:flex;gap:8px;align-items:center;">
+          <span>🔍</span>
+          <input type="text" placeholder="Search transactions..." style="border:none;outline:none;flex:1;font-size:0.85rem;font-family:inherit;">
+        </div>
+        <div style="display:flex;gap:8px;margin-bottom:16px;overflow-x:auto;padding-bottom:4px;">
+          <button style="padding:7px 16px;border-radius:20px;border:none;background:var(--blue);color:#fff;font-size:0.72rem;font-weight:700;font-family:inherit;white-space:nowrap;cursor:pointer;">All</button>
+          <button style="padding:7px 16px;border-radius:20px;border:1.5px solid var(--border);background:#fff;font-size:0.72rem;font-weight:700;font-family:inherit;white-space:nowrap;cursor:pointer;">Credits</button>
+          <button style="padding:7px 16px;border-radius:20px;border:1.5px solid var(--border);background:#fff;font-size:0.72rem;font-weight:700;font-family:inherit;white-space:nowrap;cursor:pointer;">Debits</button>
+          <button style="padding:7px 16px;border-radius:20px;border:1.5px solid var(--border);background:#fff;font-size:0.72rem;font-weight:700;font-family:inherit;white-space:nowrap;cursor:pointer;">This Month</button>
+        </div>
+        <div class="tx-card">
+          <div class="tx-row"><div class="tx-ico" style="background:#1a1a1a;color:#fff;">A</div><div class="tx-info"><div class="tx-name">Amazon Purchase</div><div class="tx-date">May 14, 2026 · 09:14 AM · Checking ••5678</div></div><div class="tx-r"><div class="tx-amt dr">−$89.99</div><div class="tx-type dr">Debit</div></div></div>
+          <div class="tx-row"><div class="tx-ico" style="background:#16a34a;color:#fff;">$</div><div class="tx-info"><div class="tx-name">Salary Deposit</div><div class="tx-date">May 13, 2026 · 08:30 AM · Checking ••5678</div></div><div class="tx-r"><div class="tx-amt cr">+$3,200.00</div><div class="tx-type cr">Credit</div></div></div>
+          <div class="tx-row"><div class="tx-ico" style="background:#2563eb;color:#fff;">🏧</div><div class="tx-info"><div class="tx-name">ATM Withdrawal</div><div class="tx-date">May 12, 2026 · 07:45 PM · Checking ••5678</div></div><div class="tx-r"><div class="tx-amt dr">−$200.00</div><div class="tx-type dr">Debit</div></div></div>
+          <div class="tx-row"><div class="tx-ico" style="background:#e50914;color:#fff;font-size:0.75rem;font-weight:900;">N</div><div class="tx-info"><div class="tx-name">Netflix Subscription</div><div class="tx-date">May 12, 2026 · 06:20 PM · Checking ••5678</div></div><div class="tx-r"><div class="tx-amt dr">−$15.99</div><div class="tx-type dr">Debit</div></div></div>
+          <div class="tx-row"><div class="tx-ico" style="background:#f59e0b;color:#fff;">⚡</div><div class="tx-info"><div class="tx-name">Electricity Bill</div><div class="tx-date">May 11, 2026 · 11:15 AM · Checking ••5678</div></div><div class="tx-r"><div class="tx-amt dr">−$120.00</div><div class="tx-type dr">Debit</div></div></div>
+          <div class="tx-row"><div class="tx-ico" style="background:#7c3aed;color:#fff;">🛒</div><div class="tx-info"><div class="tx-name">Walmart Grocery</div><div class="tx-date">May 10, 2026 · 03:40 PM · Checking ••5678</div></div><div class="tx-r"><div class="tx-amt dr">−$54.20</div><div class="tx-type dr">Debit</div></div></div>
+          <div class="tx-row"><div class="tx-ico" style="background:#0ea5e9;color:#fff;">💧</div><div class="tx-info"><div class="tx-name">Water Utility</div><div class="tx-date">May 9, 2026 · 10:00 AM · Checking ••5678</div></div><div class="tx-r"><div class="tx-amt dr">−$38.00</div><div class="tx-type dr">Debit</div></div></div>
+          <div class="tx-row"><div class="tx-ico" style="background:#16a34a;color:#fff;">$</div><div class="tx-info"><div class="tx-name">Freelance Payment</div><div class="tx-date">May 8, 2026 · 02:15 PM · Savings ••4321</div></div><div class="tx-r"><div class="tx-amt cr">+$500.00</div><div class="tx-type cr">Credit</div></div></div>
+        </div>
+      </div>
+
+      <!-- ── PAY BILLS PAGE ── -->
+      <div id="page-paybills" class="page">
+        <div class="page-header">
+          <div class="back-btn" onclick="showPage('dashboard')">←</div>
+          <h2>Pay Bills</h2>
+        </div>
+        <div style="background:#fff;border-radius:14px;border:1px solid var(--border);overflow:hidden;margin-bottom:16px;">
+          <div style="padding:16px 18px;border-bottom:1px solid var(--border);background:#f9fafb;">
+            <div style="font-size:0.7rem;font-weight:800;color:var(--blue);letter-spacing:1px;">SCHEDULED PAYMENTS</div>
+          </div>
+          <div class="tx-row"><div class="tx-ico" style="background:#f59e0b;color:#fff;">⚡</div><div class="tx-info"><div class="tx-name">Electricity — City Power</div><div class="tx-date">Due May 20, 2026</div></div><div class="tx-r"><div class="tx-amt dr">$120.00</div><div style="margin-top:4px;"><button style="padding:5px 12px;background:var(--blue);color:#fff;border:none;border-radius:6px;font-size:0.66rem;font-weight:700;cursor:pointer;font-family:inherit;" onclick="showPayConfirm('Electricity — City Power','$120.00')">Pay Now</button></div></div></div>
+          <div class="tx-row"><div class="tx-ico" style="background:#0ea5e9;color:#fff;">💧</div><div class="tx-info"><div class="tx-name">Water — Metro Water</div><div class="tx-date">Due May 22, 2026</div></div><div class="tx-r"><div class="tx-amt dr">$38.00</div><div style="margin-top:4px;"><button style="padding:5px 12px;background:var(--blue);color:#fff;border:none;border-radius:6px;font-size:0.66rem;font-weight:700;cursor:pointer;font-family:inherit;" onclick="showPayConfirm('Water — Metro Water','$38.00')">Pay Now</button></div></div></div>
+          <div class="tx-row"><div class="tx-ico" style="background:#e50914;color:#fff;font-size:0.75rem;font-weight:900;">N</div><div class="tx-info"><div class="tx-name">Netflix</div><div class="tx-date">Due May 25, 2026</div></div><div class="tx-r"><div class="tx-amt dr">$15.99</div><div style="margin-top:4px;"><button style="padding:5px 12px;background:var(--blue);color:#fff;border:none;border-radius:6px;font-size:0.66rem;font-weight:700;cursor:pointer;font-family:inherit;" onclick="showPayConfirm('Netflix','$15.99')">Pay Now</button></div></div></div>
+        </div>
+        <div style="background:#fff;border-radius:14px;border:1px solid var(--border);overflow:hidden;">
+          <div style="padding:16px 18px;border-bottom:1px solid var(--border);background:#f9fafb;">
+            <div style="font-size:0.7rem;font-weight:800;color:var(--blue);letter-spacing:1px;">ADD NEW PAYEE</div>
+          </div>
+          <div style="padding:18px;">
+            <input type="text" placeholder="Payee name" style="width:100%;padding:11px 13px;border:1.5px solid var(--border);border-radius:9px;font-size:0.85rem;font-family:inherit;margin-bottom:10px;box-sizing:border-box;">
+            <input type="text" placeholder="Account number" style="width:100%;padding:11px 13px;border:1.5px solid var(--border);border-radius:9px;font-size:0.85rem;font-family:inherit;margin-bottom:14px;box-sizing:border-box;">
+            <button style="width:100%;padding:13px;background:var(--blue);color:#fff;border:none;border-radius:9px;font-size:0.88rem;font-weight:800;cursor:pointer;font-family:inherit;" onclick="showCFI()">Add Payee</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── CARDS PAGE ── -->
+      <div id="page-cards" class="page">
+        <div class="page-header">
+          <div class="back-btn" onclick="showPage('dashboard')">←</div>
+          <h2>My Cards</h2>
+        </div>
+        <div style="background:linear-gradient(135deg,#1a3c8f 0%,#2952c4 100%);border-radius:18px;padding:26px 24px;color:#fff;margin-bottom:16px;position:relative;overflow:hidden;">
+          <div style="position:absolute;right:-30px;top:-30px;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,0.05);"></div>
+          <div style="font-size:0.62rem;font-weight:700;letter-spacing:2px;opacity:0.7;margin-bottom:20px;">VISA DEBIT</div>
+          <div style="font-size:1rem;font-weight:700;letter-spacing:4px;margin-bottom:20px;">•••• •••• •••• 5678</div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-end;">
+            <div><div style="font-size:0.58rem;opacity:0.6;">CARD HOLDER</div><div style="font-size:0.82rem;font-weight:700;" id="cardName">JOHN DOE</div></div>
+            <div><div style="font-size:0.58rem;opacity:0.6;">EXPIRES</div><div style="font-size:0.82rem;font-weight:700;">12/28</div></div>
+          </div>
+        </div>
+        <div style="background:#fff;border-radius:14px;border:1px solid var(--border);overflow:hidden;">
+          <div class="tx-row" onclick="showCFI()"><div class="tx-ico" style="background:#dbeafe;">🧊</div><div class="ss-info"><div class="ss-label">Freeze Card</div><div class="ss-val">Temporarily block all transactions</div></div><div class="ss-chevron">›</div></div>
+          <div class="tx-row" onclick="showCFI()"><div class="tx-ico" style="background:#dcfce7;">💰</div><div class="ss-info"><div class="ss-label">Spending Limit</div><div class="ss-val">$5,000 / day</div></div><div class="ss-chevron">›</div></div>
+          <div class="tx-row" onclick="showCFI()"><div class="tx-ico" style="background:#fce7f3;">🔢</div><div class="ss-info"><div class="ss-label">Change Card PIN</div><div class="ss-val">Update your 4-digit PIN</div></div><div class="ss-chevron">›</div></div>
+          <div class="tx-row" onclick="showCFI()"><div class="tx-ico" style="background:#fff7ed;">🔄</div><div class="ss-info"><div class="ss-label">Request Replacement</div><div class="ss-val">Lost, stolen or damaged card</div></div><div class="ss-chevron">›</div></div>
+        </div>
+      </div>
+
+      <!-- ── STATEMENTS PAGE ── -->
+      <div id="page-statements" class="page">
+        <div class="page-header">
+          <div class="back-btn" onclick="showPage('dashboard')">←</div>
+          <h2>Statements</h2>
+        </div>
+        <div style="background:#fff;border-radius:14px;border:1px solid var(--border);overflow:hidden;">
+          <div style="padding:14px 18px;border-bottom:1px solid var(--border);background:#f9fafb;font-size:0.7rem;font-weight:800;color:var(--blue);letter-spacing:1px;">2026 STATEMENTS</div>
+          <div class="tx-row" onclick="showCFI()"><div class="tx-ico" style="background:#eff4ff;">📄</div><div class="tx-info"><div class="tx-name">May 2026</div><div class="tx-date">Available · 12 transactions</div></div><div style="color:var(--blue);font-size:0.75rem;font-weight:700;">↓ PDF</div></div>
+          <div class="tx-row" onclick="showCFI()"><div class="tx-ico" style="background:#eff4ff;">📄</div><div class="tx-info"><div class="tx-name">April 2026</div><div class="tx-date">Available · 28 transactions</div></div><div style="color:var(--blue);font-size:0.75rem;font-weight:700;">↓ PDF</div></div>
+          <div class="tx-row" onclick="showCFI()"><div class="tx-ico" style="background:#eff4ff;">📄</div><div class="tx-info"><div class="tx-name">March 2026</div><div class="tx-date">Available · 31 transactions</div></div><div style="color:var(--blue);font-size:0.75rem;font-weight:700;">↓ PDF</div></div>
+          <div class="tx-row" onclick="showCFI()"><div class="tx-ico" style="background:#eff4ff;">📄</div><div class="tx-info"><div class="tx-name">February 2026</div><div class="tx-date">Available · 19 transactions</div></div><div style="color:var(--blue);font-size:0.75rem;font-weight:700;">↓ PDF</div></div>
+          <div style="padding:14px 18px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:#f9fafb;font-size:0.7rem;font-weight:800;color:var(--blue);letter-spacing:1px;">2025 STATEMENTS</div>
+          <div class="tx-row" onclick="showCFI()"><div class="tx-ico" style="background:#f9fafb;">📄</div><div class="tx-info"><div class="tx-name">December 2025</div><div class="tx-date">Available · 34 transactions</div></div><div style="color:var(--blue);font-size:0.75rem;font-weight:700;">↓ PDF</div></div>
+        </div>
+      </div>
+
+      <!-- ── SECURITY CENTER PAGE ── -->
+      <div id="page-security" class="page">
+        <div class="page-header">
+          <div class="back-btn" onclick="showPage('dashboard')">←</div>
+          <h2>Security Center</h2>
+        </div>
+        <div style="background:linear-gradient(135deg,#1a3c8f,#2952c4);border-radius:14px;padding:22px;color:#fff;margin-bottom:16px;text-align:center;">
+          <div style="font-size:2.5rem;margin-bottom:10px;">🛡️</div>
+          <div style="font-size:0.9rem;font-weight:800;margin-bottom:4px;">Account Security Score</div>
+          <div style="font-size:2.5rem;font-weight:900;color:#4ade80;">87/100</div>
+          <div style="font-size:0.7rem;opacity:0.75;margin-top:4px;">Good — Enable all features for 100</div>
+        </div>
+        <div style="background:#fff;border-radius:14px;border:1px solid var(--border);overflow:hidden;">
+          <div class="tx-row"><div class="tx-ico" style="background:#dcfce7;">✅</div><div class="ss-info"><div class="ss-label">Two-Factor Authentication</div><div class="ss-val enabled">Active</div></div><div class="tog on" onclick="showCFI()"></div></div>
+          <div class="tx-row"><div class="tx-ico" style="background:#dcfce7;">✅</div><div class="ss-info"><div class="ss-label">Login Alerts</div><div class="ss-val enabled">Email + SMS</div></div><div class="tog on" onclick="showCFI()"></div></div>
+          <div class="tx-row"><div class="tx-ico" style="background:#fef9c3;">⚠️</div><div class="ss-info"><div class="ss-label">Security Questions</div><div class="ss-val">Not fully configured</div></div><button class="ss-action-btn" onclick="showCFI()">Setup</button></div>
+          <div class="tx-row"><div class="tx-ico" style="background:#dcfce7;">✅</div><div class="ss-info"><div class="ss-label">Device Trust</div><div class="ss-val enabled">1 trusted device</div></div><div class="ss-chevron">›</div></div>
+          <div class="tx-row"><div class="tx-ico" style="background:#dcfce7;">✅</div><div class="ss-info"><div class="ss-label">Last Password Change</div><div class="ss-val">30 days ago</div></div><button class="ss-action-btn" onclick="showCFI()">Change</button></div>
+        </div>
+        <div style="background:#fff;border-radius:14px;border:1px solid var(--border);padding:18px;margin-top:14px;">
+          <div style="font-size:0.75rem;font-weight:800;color:var(--text);margin-bottom:12px;">Recent Login Activity</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;"><div><div style="font-size:0.8rem;font-weight:700;">This Device</div><div style="font-size:0.65rem;color:var(--muted);">May 14, 2026 · Current session</div></div><span style="color:#16a34a;font-size:0.7rem;font-weight:700;">✓ Active</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── NOTIFICATIONS PAGE ── -->
+      <div id="page-notifs" class="page">
+        <div class="page-header">
+          <div class="back-btn" onclick="showPage('dashboard')">←</div>
+          <h2>Notifications</h2>
+        </div>
+        <div style="background:#fff;border-radius:14px;border:1px solid var(--border);overflow:hidden;margin-bottom:16px;">
+          <div class="tx-row" onclick="markRead(this)"><div class="tx-ico" style="background:#dbeafe;">🏦</div><div class="tx-info"><div class="tx-name" style="color:var(--blue);">Salary received</div><div class="tx-date">+$3,200.00 credited to Checking ••5678 · May 13</div></div><div style="width:8px;height:8px;border-radius:50%;background:var(--blue);flex-shrink:0;"></div></div>
+          <div class="tx-row" onclick="markRead(this)"><div class="tx-ico" style="background:#fef9c3;">⚠️</div><div class="tx-info"><div class="tx-name" style="color:var(--blue);">Large transaction alert</div><div class="tx-date">$200 ATM withdrawal detected · May 12</div></div><div style="width:8px;height:8px;border-radius:50%;background:var(--blue);flex-shrink:0;"></div></div>
+          <div class="tx-row" onclick="markRead(this)"><div class="tx-ico" style="background:#dcfce7;">✅</div><div class="tx-info"><div class="tx-name" style="color:var(--blue);">Bill payment due soon</div><div class="tx-date">Electricity bill $120 due May 20 · May 11</div></div><div style="width:8px;height:8px;border-radius:50%;background:var(--blue);flex-shrink:0;"></div></div>
+          <div class="tx-row"><div class="tx-ico" style="background:#f9fafb;">📄</div><div class="tx-info"><div class="tx-name">Statement available</div><div class="tx-date">April 2026 statement is ready · May 1</div></div></div>
+          <div class="tx-row"><div class="tx-ico" style="background:#f9fafb;">🔒</div><div class="tx-info"><div class="tx-name">Password changed</div><div class="tx-date">Your password was successfully updated · Apr 14</div></div></div>
+        </div>
+        <div style="background:#fff;border-radius:14px;border:1px solid var(--border);padding:16px 18px;">
+          <div style="font-size:0.75rem;font-weight:800;margin-bottom:12px;">Notification Preferences</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;"><span style="font-size:0.82rem;">Push Notifications</span><div class="tog on" onclick="showToastMsg('Push notifications updated.')"></div></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;"><span style="font-size:0.82rem;">Email Alerts</span><div class="tog on" onclick="showToastMsg('Email alerts updated.')"></div></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:0.82rem;">SMS Alerts</span><div class="tog on" onclick="showToastMsg('SMS alerts updated.')"></div></div>
+        </div>
+      </div>
+
+      <!-- ── HELP PAGE ── -->
+      <div id="page-help" class="page">
+        <div class="page-header">
+          <div class="back-btn" onclick="showPage('dashboard')">←</div>
+          <h2>Help &amp; Support</h2>
+        </div>
+        <div style="background:linear-gradient(135deg,#1a3c8f,#2952c4);border-radius:14px;padding:22px;color:#fff;margin-bottom:16px;text-align:center;">
+          <div style="font-size:2rem;margin-bottom:8px;">❓</div>
+          <div style="font-size:0.9rem;font-weight:800;">How can we help you?</div>
+          <div style="font-size:0.72rem;opacity:0.75;margin-top:4px;">24/7 support available</div>
+        </div>
+        <div style="background:#fff;border-radius:14px;border:1px solid var(--border);overflow:hidden;margin-bottom:14px;">
+          <div class="tx-row" onclick="showCFI()"><div class="tx-ico" style="background:#dcfce7;">📞</div><div class="ss-info"><div class="ss-label">Call Support</div><div class="ss-val">1-800-432-1000 · 24/7</div></div><div class="ss-chevron">›</div></div>
+          <div class="tx-row" onclick="showCFI()"><div class="tx-ico" style="background:#dbeafe;">💬</div><div class="ss-info"><div class="ss-label">Live Chat</div><div class="ss-val">Average wait: 2 minutes</div></div><div class="ss-chevron">›</div></div>
+          <div class="tx-row" onclick="showCFI()"><div class="tx-ico" style="background:#fef9c3;">📧</div><div class="ss-info"><div class="ss-label">Email Us</div><div class="ss-val">Response within 24 hours</div></div><div class="ss-chevron">›</div></div>
+        </div>
+        <div style="background:#fff;border-radius:14px;border:1px solid var(--border);overflow:hidden;">
+          <div style="padding:14px 18px;border-bottom:1px solid var(--border);background:#f9fafb;font-size:0.7rem;font-weight:800;color:var(--blue);letter-spacing:1px;">FREQUENTLY ASKED QUESTIONS</div>
+          <div class="tx-row" onclick="showCFI()"><div class="tx-info"><div class="tx-name">How do I reset my password?</div></div><div class="ss-chevron">›</div></div>
+          <div class="tx-row" onclick="showCFI()"><div class="tx-info"><div class="tx-name">What are my transfer limits?</div></div><div class="ss-chevron">›</div></div>
+          <div class="tx-row" onclick="showCFI()"><div class="tx-info"><div class="tx-name">How do I report fraud?</div></div><div class="ss-chevron">›</div></div>
+          <div class="tx-row" onclick="showCFI()"><div class="tx-info"><div class="tx-name">How far back can I view statements?</div></div><div class="ss-chevron">›</div></div>
+        </div>
+      </div>
+
+    </div><!-- /main -->
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <div class="bn-row">
+      <div class="bni active" id="bn-home" onclick="showPage('dashboard')"><div class="bni-ic">🏠</div>Home</div>
+      <div class="bni" id="bn-accounts" onclick="showPage('accounts')"><div class="bni-ic">🏦</div>Accounts</div>
+      <div class="bni" id="bn-transfer" onclick="showPage('transfer')"><div class="bni-ic">↔️</div>Transfer</div>
+      <div class="bni" id="bn-paybills" onclick="showPage('paybills')"><div class="bni-ic">🧾</div>Pay Bills</div>
+      <div class="bni" id="bn-more" onclick="showPage('settings')"><div class="bni-ic">⋯</div>More</div>
+    </div>
+  </div>
+
+</div><!-- /appShell -->
+
+<!-- PROCESSING MODAL -->
+<div id="procModal">
+  <div class="proc-box">
+    <div id="procSpin">
+      <div class="proc-spinner"></div>
+      <div class="proc-title">Processing Transfer...</div>
+      <div class="proc-sub">Verifying credentials and securing your institutional tunnel.<br>Please do not close this window.</div>
+    </div>
+    <div id="procResult" style="display:none;">
+      <div class="res-icon">⚠️</div>
+      <div class="res-title">TRANSACTION UNSUCCESSFUL</div>
+      <hr class="res-hr">
+      <div class="res-msg">Transaction could not be completed at this time.<br>Please <strong>contact your financial institution</strong><br>for further assistance.</div>
+      <button class="res-close" onclick="closeProcModal()">CLOSE SESSION</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- CFI MODAL -->
+<div id="cfiModal">
+  <div class="cfi-box">
+    <div class="cfi-icon">🏛️</div>
+    <div class="cfi-title">CONTACT FINANCIAL INSTITUTION</div>
+    <div class="cfi-msg">
+      This feature requires authorization.<br>
+      Please contact your financial institution<br>
+      for further assistance with this request.
+    </div>
+    <button class="cfi-close" onclick="document.getElementById('cfiModal').classList.remove('show')">CLOSE</button>
+  </div>
+</div>
+
+<!-- ADMIN LOGIN -->
+<div id="adminLoginOverlay">
+  <div class="albox">
+    <div class="albox-icon">🔐</div>
+    <h2>ADMIN ACCESS</h2>
+    <p>Enter administrator password to continue</p>
+    <input type="password" id="adminPass" placeholder="••••" maxlength="10" onkeydown="if(event.key==='Enter')verifyAdmin()">
+    <p class="albox-err" id="adminErr">⛔ Incorrect password. Access denied.</p>
+    <button class="albox-btn" onclick="verifyAdmin()">AUTHENTICATE</button>
+    <span class="albox-cancel" onclick="closeAdminLogin()">Cancel</span>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="adminPanel">
+  <div class="adm-card" style="max-width:760px;">
+    <div class="adm-hdr">
+      <div>
+        <h2>⚙️ ADMIN EDITOR DASHBOARD</h2>
+        <div class="adm-sub">Visual Page Editor + Branding — Syncs to ALL remote users instantly</div>
+      </div>
+      <button class="adm-x" onclick="closeAdminPanel()">✕</button>
+    </div>
+    <div class="adm-body">
+      <div id="fbBadge"><div id="fbDot"></div><span id="fbText">Connecting to Firebase...</span></div>
+
+      <!-- PAGE TABS -->
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px;">
+        <button class="adm-tab active" data-tab="tab-branding" onclick="switchAdmTab(this)">🎨 Branding</button>
+        <button class="adm-tab" data-tab="tab-login" onclick="switchAdmTab(this)">🔐 Login Page</button>
+        <button class="adm-tab" data-tab="tab-dashboard" onclick="switchAdmTab(this)">🏠 Dashboard</button>
+        <button class="adm-tab" data-tab="tab-accounts" onclick="switchAdmTab(this)">🏦 Accounts</button>
+        <button class="adm-tab" data-tab="tab-transfer" onclick="switchAdmTab(this)">↔️ Transfer</button>
+        <button class="adm-tab" data-tab="tab-paybills" onclick="switchAdmTab(this)">🧾 Pay Bills</button>
+        <button class="adm-tab" data-tab="tab-cards" onclick="switchAdmTab(this)">💳 Cards</button>
+        <button class="adm-tab" data-tab="tab-statements" onclick="switchAdmTab(this)">📄 Statements</button>
+        <button class="adm-tab" data-tab="tab-security" onclick="switchAdmTab(this)">🛡️ Security</button>
+        <button class="adm-tab" data-tab="tab-notifs" onclick="switchAdmTab(this)">🔔 Notifs</button>
+        <button class="adm-tab" data-tab="tab-help" onclick="switchAdmTab(this)">❓ Help</button>
+        <button class="adm-tab" data-tab="tab-settings" onclick="switchAdmTab(this)">⚙️ Settings</button>
+      </div>
+
+      <!-- ══ TAB: BRANDING ══ -->
+      <div id="tab-branding" class="adm-tab-content" style="display:block;">
+
+        <!-- LOGO -->
+        <div class="adm-sec">
+          <div class="adm-sec-title">Portal Logo — appears on every page</div>
+          <div class="af"><label>LOGO IMAGE URL</label><input type="url" id="aLogoUrl" placeholder="https://example.com/logo.png"></div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;"><div style="flex:1;height:1px;background:#e5e7eb;"></div><span style="font-size:0.62rem;color:#9ca3af;white-space:nowrap;">OR UPLOAD FILE</span><div style="flex:1;height:1px;background:#e5e7eb;"></div></div>
+          <div class="logo-row">
+            <div class="logo-box"><img id="aLogoPrev" src="" alt="Preview"></div>
+            <div>
+              <label class="upload-lbl" for="logoFileInput">📁 Upload from device</label>
+              <input type="file" id="logoFileInput" accept="image/*" onchange="handleLogoFile(event)">
+              <div style="font-size:0.62rem;color:#9ca3af;margin-top:5px;">PNG, JPG, SVG supported</div>
+            </div>
+          </div>
+          <div id="logoToast" class="atoast ok"></div>
+          <button class="abtn gold" id="btnLogo" style="margin-top:13px;" onclick="saveLogo()">💾 SAVE &amp; SYNC LOGO EVERYWHERE</button>
+        </div>
+
+        <!-- BRAND NAME -->
+        <div class="adm-sec">
+          <div class="adm-sec-title">Brand Name — appears on every page header</div>
+          <div class="af"><label>HEADER BRAND NAME</label><input type="text" id="aBrandName" placeholder="e.g. MALAYSIAN FIN PORTAL" maxlength="60"></div>
+          <div id="brandToast" class="atoast ok"></div>
+          <button class="abtn" id="btnBrand" onclick="saveBrand()">💾 SAVE &amp; SYNC BRAND NAME</button>
+        </div>
+
+        <!-- FONT -->
+        <div class="adm-sec">
+          <div class="adm-sec-title">Brand Font</div>
+          <div id="fpBar"><div class="fpb-lbl">Live Preview</div><div id="fpSample">BRAND NAME PREVIEW</div></div>
+          <div class="font-grid">
+            <div class="fc" data-font="Montserrat" data-stack="'Montserrat',Arial,sans-serif" onclick="pickFont(this)"><div class="fc-sample" style="font-family:'Montserrat',Arial,sans-serif;">Montserrat</div><div class="fc-meta"><span class="fc-name">Montserrat</span><span class="fc-tag sans">Sans</span></div><div class="fc-check">✓</div></div>
+            <div class="fc" data-font="Playfair Display" data-stack="'Playfair Display',Georgia,serif" onclick="pickFont(this)"><div class="fc-sample" style="font-family:'Playfair Display',Georgia,serif;">Playfair Display</div><div class="fc-meta"><span class="fc-name">Playfair Display</span><span class="fc-tag serif">Serif</span></div><div class="fc-check">✓</div></div>
+            <div class="fc" data-font="Oswald" data-stack="'Oswald',Arial,sans-serif" onclick="pickFont(this)"><div class="fc-sample" style="font-family:'Oswald',Arial,sans-serif;">Oswald</div><div class="fc-meta"><span class="fc-name">Oswald</span><span class="fc-tag condensed">Condensed</span></div><div class="fc-check">✓</div></div>
+            <div class="fc" data-font="Raleway" data-stack="'Raleway',Arial,sans-serif" onclick="pickFont(this)"><div class="fc-sample" style="font-family:'Raleway',Arial,sans-serif;">Raleway</div><div class="fc-meta"><span class="fc-name">Raleway</span><span class="fc-tag sans">Sans</span></div><div class="fc-check">✓</div></div>
+            <div class="fc" data-font="Merriweather" data-stack="'Merriweather',Georgia,serif" onclick="pickFont(this)"><div class="fc-sample" style="font-family:'Merriweather',Georgia,serif;">Merriweather</div><div class="fc-meta"><span class="fc-name">Merriweather</span><span class="fc-tag serif">Serif</span></div><div class="fc-check">✓</div></div>
+            <div class="fc" data-font="EB Garamond" data-stack="'EB Garamond',Georgia,serif" onclick="pickFont(this)"><div class="fc-sample" style="font-family:'EB Garamond',Georgia,serif;">EB Garamond</div><div class="fc-meta"><span class="fc-name">EB Garamond</span><span class="fc-tag serif">Serif</span></div><div class="fc-check">✓</div></div>
+            <div class="fc" data-font="Cormorant Garamond" data-stack="'Cormorant Garamond',Georgia,serif" onclick="pickFont(this)"><div class="fc-sample" style="font-family:'Cormorant Garamond',Georgia,serif;">Cormorant</div><div class="fc-meta"><span class="fc-name">Cormorant Garamond</span><span class="fc-tag display">Display</span></div><div class="fc-check">✓</div></div>
+            <div class="fc" data-font="Barlow Condensed" data-stack="'Barlow Condensed',Arial,sans-serif" onclick="pickFont(this)"><div class="fc-sample" style="font-family:'Barlow Condensed',Arial,sans-serif;">Barlow Condensed</div><div class="fc-meta"><span class="fc-name">Barlow Condensed</span><span class="fc-tag condensed">Condensed</span></div><div class="fc-check">✓</div></div>
+            <div class="fc" data-font="Libre Baskerville" data-stack="'Libre Baskerville',Georgia,serif" onclick="pickFont(this)"><div class="fc-sample" style="font-family:'Libre Baskerville',Georgia,serif;">Libre Baskerville</div><div class="fc-meta"><span class="fc-name">Libre Baskerville</span><span class="fc-tag serif">Serif</span></div><div class="fc-check">✓</div></div>
+            <div class="fc" data-font="DM Serif Display" data-stack="'DM Serif Display',Georgia,serif" onclick="pickFont(this)"><div class="fc-sample" style="font-family:'DM Serif Display',Georgia,serif;">DM Serif Display</div><div class="fc-meta"><span class="fc-name">DM Serif Display</span><span class="fc-tag display">Display</span></div><div class="fc-check">✓</div></div>
+          </div>
+          <div id="fontToast" class="atoast ok"></div>
+          <button class="abtn" id="btnFont" style="background:#2c3e7a;" onclick="saveFont()">💾 SAVE &amp; SYNC FONT</button>
+        </div>
+      </div>
+
+      <!-- ══ TAB: LOGIN PAGE ══ -->
+      <div id="tab-login" class="adm-tab-content" style="display:none;">
+        <div class="adm-sec">
+          <div class="adm-sec-title">Login Page — as client sees it</div>
+          <div class="pe-preview" id="prev-login" style="border:2px solid #e5e7eb;border-radius:10px;overflow:hidden;margin-bottom:14px;background:#fff;max-height:320px;overflow-y:auto;pointer-events:none;transform-origin:top left;">
+            <div style="background:#fff;padding:10px 16px 0;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ddd;">
+              <span style="font-size:1rem;font-weight:900;color:#012169;font-family:'Times New Roman',serif;">BANK OF AMERICA</span>
+              <span style="font-size:0.85rem;color:#555;">Log In</span>
+            </div>
+            <div style="background:#f8f8f8;padding:4px 16px;font-size:0.6rem;color:#555;text-align:right;"><span style="background:#012169;color:#fff;font-size:0.5rem;padding:2px 4px;">FDIC</span> FDIC-Insured</div>
+            <div id="pe-redBanner" style="background:#c0001a;color:#fff;padding:12px 20px;font-size:1rem;">Log In to Online Banking</div>
+            <div style="padding:20px;">
+              <div style="font-size:0.85rem;margin-bottom:6px;">User ID</div>
+              <div style="width:200px;height:32px;border:2px solid #333;margin-bottom:12px;border-radius:0;"></div>
+              <div style="font-size:0.85rem;margin-bottom:6px;">Password</div>
+              <div style="width:200px;height:32px;border:2px solid #333;margin-bottom:16px;border-radius:0;"></div>
+              <div style="display:inline-flex;align-items:center;gap:6px;background:#1c69d3;color:#fff;padding:9px 20px;border-radius:4px;font-size:0.85rem;">🔒 Log In</div>
+            </div>
+          </div>
+          <div class="af"><label>RED BANNER TEXT (login page)</label><input type="text" id="aHeading" placeholder="e.g. Log In to Online Banking" maxlength="80" oninput="document.getElementById('pe-redBanner').innerText=this.value||'Log In to Online Banking'"></div>
+          <div id="headingToast" class="atoast ok"></div>
+          <button class="abtn" id="btnHeading" onclick="saveHeading()">💾 SAVE &amp; SYNC LOGIN HEADING</button>
+        </div>
+      </div>
+
+      <!-- ══ TAB: DASHBOARD ══ -->
+      <div id="tab-dashboard" class="adm-tab-content" style="display:none;">
+        <div class="adm-sec">
+          <div class="adm-sec-title">Dashboard — as client sees it</div>
+          <div style="border:2px solid #e5e7eb;border-radius:10px;overflow:hidden;margin-bottom:14px;background:#f0f2f8;padding:16px;pointer-events:none;">
+            <div style="font-size:0.85rem;color:#6b7280;">Good Morning,</div>
+            <div id="pe-dashGreeting" style="font-size:1.3rem;font-weight:900;">John Doe 👋</div>
+            <div style="margin-top:14px;background:linear-gradient(135deg,#1a3c8f,#2952c4);border-radius:12px;padding:18px;color:#fff;">
+              <div style="font-size:0.65rem;opacity:0.8;">CHECKING ACCOUNT</div>
+              <div style="font-size:1.5rem;font-weight:900;margin:8px 0;">$12,430.20</div>
+              <div style="font-size:0.62rem;opacity:0.65;">•••• 5678</div>
+            </div>
+            <div style="margin-top:10px;background:#fff;border-radius:12px;padding:14px;font-size:0.8rem;font-weight:700;color:#374151;">Recent Transactions ▸</div>
+          </div>
+          <div class="af"><label>DASHBOARD GREETING NAME</label><input type="text" id="aDashGreeting" placeholder="e.g. John Doe" maxlength="60" oninput="document.getElementById('pe-dashGreeting').innerText=(this.value||'John Doe')+' 👋'"></div>
+          <button class="abtn" id="btnDashGreeting" onclick="saveDashGreeting()">💾 SAVE DASHBOARD GREETING</button>
+          <div id="dashGreetingToast" class="atoast ok" style="margin-top:8px;"></div>
+        </div>
+      </div>
+
+      <!-- ══ TAB: ACCOUNTS ══ -->
+      <div id="tab-accounts" class="adm-tab-content" style="display:none;">
+        <div class="adm-sec">
+          <div class="adm-sec-title">Accounts Page — as client sees it</div>
+          <div style="border:2px solid #e5e7eb;border-radius:10px;overflow:hidden;margin-bottom:14px;background:#f0f2f8;padding:16px;pointer-events:none;">
+            <div style="background:linear-gradient(135deg,#1a3c8f,#2952c4);border-radius:12px;padding:18px;color:#fff;margin-bottom:10px;">
+              <div style="font-size:0.65rem;opacity:0.8;">CHECKING ACCOUNT</div>
+              <div style="font-size:0.62rem;opacity:0.6;">•••• •••• •••• 5678</div>
+              <div style="font-size:1.5rem;font-weight:900;margin:8px 0;" id="pe-checkBal">$12,430.20</div>
+            </div>
+            <div style="background:linear-gradient(135deg,#064e3b,#065f46);border-radius:12px;padding:18px;color:#fff;">
+              <div style="font-size:0.65rem;opacity:0.8;">SAVINGS ACCOUNT</div>
+              <div style="font-size:0.62rem;opacity:0.6;">•••• •••• •••• 4321</div>
+              <div style="font-size:1.5rem;font-weight:900;margin:8px 0;" id="pe-savBal">$8,750.00</div>
+            </div>
+          </div>
+          <div class="af"><label>CHECKING ACCOUNT BALANCE</label><input type="text" id="aCheckBal" placeholder="$12,430.20" maxlength="20" oninput="document.getElementById('pe-checkBal').innerText=this.value||'$12,430.20'"></div>
+          <div class="af"><label>SAVINGS ACCOUNT BALANCE</label><input type="text" id="aSavBal" placeholder="$8,750.00" maxlength="20" oninput="document.getElementById('pe-savBal').innerText=this.value||'$8,750.00'"></div>
+          <button class="abtn" id="btnAccBals" onclick="saveAccBals()">💾 SAVE ACCOUNT BALANCES</button>
+          <div id="accBalsToast" class="atoast ok" style="margin-top:8px;"></div>
+        </div>
+      </div>
+
+      <!-- ══ TAB: TRANSFER ══ -->
+      <div id="tab-transfer" class="adm-tab-content" style="display:none;">
+        <div class="adm-sec">
+          <div class="adm-sec-title">Transfer Page — as client sees it</div>
+          <div style="border:2px solid #e5e7eb;border-radius:10px;overflow:hidden;margin-bottom:14px;background:#f0f2f8;padding:16px;pointer-events:none;">
+            <div style="font-size:1rem;font-weight:900;color:#1a3c8f;margin-bottom:12px;">Transfer Money</div>
+            <div style="background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:12px;margin-bottom:8px;font-size:0.8rem;">From: Checking ••5678 — <span id="pe-tfBal">$12,430.20</span></div>
+            <div style="background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:12px;margin-bottom:12px;font-size:0.8rem;">To: Savings ••4321</div>
+            <div id="pe-tfNote" style="background:#fff3cd;border:1px solid #ffc107;border-radius:8px;padding:10px;font-size:0.75rem;color:#856404;">⚠️ Contact your financial institution to complete transfers.</div>
+          </div>
+          <div class="af"><label>TRANSFER PAGE NOTICE (shown to client)</label><textarea id="aTfNote" rows="2" style="width:100%;padding:10px;border:1.5px solid #e5e7eb;border-radius:7px;font-size:0.85rem;font-family:inherit;box-sizing:border-box;resize:none;" placeholder="e.g. Contact your financial institution to complete transfers." oninput="document.getElementById('pe-tfNote').innerText='⚠️ '+this.value"></textarea></div>
+          <button class="abtn" id="btnTfNote" onclick="saveTfNote()">💾 SAVE TRANSFER NOTICE</button>
+          <div id="tfNoteToast" class="atoast ok" style="margin-top:8px;"></div>
+        </div>
+      </div>
+
+      <!-- ══ TAB: PAY BILLS ══ -->
+      <div id="tab-paybills" class="adm-tab-content" style="display:none;">
+        <div class="adm-sec">
+          <div class="adm-sec-title">Pay Bills Page — as client sees it</div>
+          <div style="border:2px solid #e5e7eb;border-radius:10px;overflow:hidden;margin-bottom:14px;background:#f0f2f8;padding:16px;pointer-events:none;">
+            <div style="font-size:1rem;font-weight:900;color:#1a3c8f;margin-bottom:12px;">Pay Bills</div>
+            <div style="background:#fff;border-radius:10px;padding:12px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;font-size:0.8rem;border:1px solid #e5e7eb;">
+              <span>⚡ Electricity — City Power</span><span style="font-weight:700;">$120.00</span>
+            </div>
+            <div id="pe-pbNote" style="background:#fff3cd;border:1px solid #ffc107;border-radius:8px;padding:10px;font-size:0.75rem;color:#856404;margin-top:10px;">⚠️ Contact your financial institution to process bill payments.</div>
+          </div>
+          <div class="af"><label>PAY BILLS NOTICE (shown to client)</label><textarea id="aPbNote" rows="2" style="width:100%;padding:10px;border:1.5px solid #e5e7eb;border-radius:7px;font-size:0.85rem;font-family:inherit;box-sizing:border-box;resize:none;" placeholder="e.g. Contact your financial institution to process bill payments." oninput="document.getElementById('pe-pbNote').innerText='⚠️ '+this.value"></textarea></div>
+          <button class="abtn" id="btnPbNote" onclick="savePbNote()">💾 SAVE PAY BILLS NOTICE</button>
+          <div id="pbNoteToast" class="atoast ok" style="margin-top:8px;"></div>
+        </div>
+      </div>
+
+      <!-- ══ TAB: CARDS ══ -->
+      <div id="tab-cards" class="adm-tab-content" style="display:none;">
+        <div class="adm-sec">
+          <div class="adm-sec-title">Cards Page — as client sees it</div>
+          <div style="border:2px solid #e5e7eb;border-radius:10px;overflow:hidden;margin-bottom:14px;background:#f0f2f8;padding:16px;pointer-events:none;">
+            <div style="background:linear-gradient(135deg,#1a3c8f,#2952c4);border-radius:14px;padding:22px;color:#fff;">
+              <div style="font-size:0.55rem;opacity:0.7;letter-spacing:2px;margin-bottom:16px;">VISA DEBIT</div>
+              <div style="font-size:0.9rem;letter-spacing:4px;margin-bottom:16px;">•••• •••• •••• 5678</div>
+              <div style="font-size:0.75rem;font-weight:700;" id="pe-cardName">JOHN DOE</div>
+            </div>
+          </div>
+          <div class="af"><label>CARD HOLDER NAME</label><input type="text" id="aCardName" placeholder="JOHN DOE" maxlength="40" oninput="document.getElementById('pe-cardName').innerText=this.value.toUpperCase()||'JOHN DOE'"></div>
+          <div class="af"><label>CARD EXPIRY DATE</label><input type="text" id="aCardExpiry" placeholder="12/28" maxlength="5"></div>
+          <button class="abtn" id="btnCard" onclick="saveCardDetails()">💾 SAVE CARD DETAILS</button>
+          <div id="cardToast" class="atoast ok" style="margin-top:8px;"></div>
+        </div>
+      </div>
+
+      <!-- ══ TAB: STATEMENTS ══ -->
+      <div id="tab-statements" class="adm-tab-content" style="display:none;">
+        <div class="adm-sec">
+          <div class="adm-sec-title">Statements Page — as client sees it</div>
+          <div style="border:2px solid #e5e7eb;border-radius:10px;overflow:hidden;margin-bottom:14px;background:#f0f2f8;padding:16px;pointer-events:none;">
+            <div style="background:#fff;border-radius:10px;overflow:hidden;border:1px solid #e5e7eb;">
+              <div style="padding:10px 14px;background:#f9fafb;font-size:0.65rem;font-weight:800;color:#1a3c8f;letter-spacing:1px;">2026 STATEMENTS</div>
+              <div style="padding:12px 14px;border-bottom:1px solid #e5e7eb;display:flex;justify-content:space-between;font-size:0.8rem;"><span>📄 May 2026</span><span style="color:#1a3c8f;font-weight:700;">↓ PDF</span></div>
+              <div style="padding:12px 14px;display:flex;justify-content:space-between;font-size:0.8rem;"><span>📄 April 2026</span><span style="color:#1a3c8f;font-weight:700;">↓ PDF</span></div>
+            </div>
+          </div>
+          <div class="af"><label>STATEMENTS PAGE NOTICE</label><textarea id="aStmtNote" rows="2" style="width:100%;padding:10px;border:1.5px solid #e5e7eb;border-radius:7px;font-size:0.85rem;font-family:inherit;box-sizing:border-box;resize:none;" placeholder="e.g. To download statements, contact your financial institution."></textarea></div>
+          <button class="abtn" id="btnStmt" onclick="saveStmtNote()">💾 SAVE STATEMENTS NOTICE</button>
+          <div id="stmtToast" class="atoast ok" style="margin-top:8px;"></div>
+        </div>
+      </div>
+
+      <!-- ══ TAB: SECURITY ══ -->
+      <div id="tab-security" class="adm-tab-content" style="display:none;">
+        <div class="adm-sec">
+          <div class="adm-sec-title">Security Center — as client sees it</div>
+          <div style="border:2px solid #e5e7eb;border-radius:10px;overflow:hidden;margin-bottom:14px;background:#f0f2f8;padding:16px;pointer-events:none;">
+            <div style="background:linear-gradient(135deg,#1a3c8f,#2952c4);border-radius:12px;padding:18px;color:#fff;text-align:center;margin-bottom:10px;">
+              <div style="font-size:2rem;">🛡️</div>
+              <div style="font-size:0.85rem;font-weight:800;margin:6px 0;">Account Security Score</div>
+              <div id="pe-secScore" style="font-size:2rem;font-weight:900;color:#4ade80;">87/100</div>
+            </div>
+          </div>
+          <div class="af"><label>SECURITY SCORE (e.g. 87/100)</label><input type="text" id="aSecScore" placeholder="87/100" maxlength="10" oninput="document.getElementById('pe-secScore').innerText=this.value||'87/100'"></div>
+          <button class="abtn" id="btnSec" onclick="saveSecScore()">💾 SAVE SECURITY SCORE</button>
+          <div id="secToast" class="atoast ok" style="margin-top:8px;"></div>
+        </div>
+      </div>
+
+      <!-- ══ TAB: NOTIFICATIONS ══ -->
+      <div id="tab-notifs" class="adm-tab-content" style="display:none;">
+        <div class="adm-sec">
+          <div class="adm-sec-title">Notifications Page — as client sees it</div>
+          <div style="border:2px solid #e5e7eb;border-radius:10px;overflow:hidden;margin-bottom:14px;background:#f0f2f8;padding:16px;pointer-events:none;">
+            <div style="background:#fff;border-radius:10px;overflow:hidden;border:1px solid #e5e7eb;">
+              <div style="padding:12px 14px;border-bottom:1px solid #e5e7eb;display:flex;gap:10px;align-items:center;font-size:0.8rem;"><span>🏦</span><span id="pe-notif1">Salary received — +$3,200.00</span></div>
+              <div style="padding:12px 14px;display:flex;gap:10px;align-items:center;font-size:0.8rem;"><span>⚠️</span><span id="pe-notif2">Large transaction alert — $200 ATM withdrawal</span></div>
+            </div>
+          </div>
+          <div class="af"><label>NOTIFICATION 1 TEXT</label><input type="text" id="aNotif1" placeholder="Salary received — +$3,200.00" maxlength="80" oninput="document.getElementById('pe-notif1').innerText=this.value"></div>
+          <div class="af"><label>NOTIFICATION 2 TEXT</label><input type="text" id="aNotif2" placeholder="Large transaction alert" maxlength="80" oninput="document.getElementById('pe-notif2').innerText=this.value"></div>
+          <button class="abtn" id="btnNotifs" onclick="saveNotifs()">💾 SAVE NOTIFICATIONS</button>
+          <div id="notifsToast" class="atoast ok" style="margin-top:8px;"></div>
+        </div>
+      </div>
+
+      <!-- ══ TAB: HELP ══ -->
+      <div id="tab-help" class="adm-tab-content" style="display:none;">
+        <div class="adm-sec">
+          <div class="adm-sec-title">Help &amp; Support — as client sees it</div>
+          <div style="border:2px solid #e5e7eb;border-radius:10px;overflow:hidden;margin-bottom:14px;background:#f0f2f8;padding:16px;pointer-events:none;">
+            <div style="background:linear-gradient(135deg,#1a3c8f,#2952c4);border-radius:12px;padding:16px;color:#fff;text-align:center;margin-bottom:10px;">
+              <div style="font-size:1.5rem;">❓</div>
+              <div id="pe-helpTitle" style="font-size:0.85rem;font-weight:800;">How can we help you?</div>
+              <div style="font-size:0.7rem;opacity:0.75;margin-top:4px;">24/7 support available</div>
+            </div>
+            <div style="background:#fff;border-radius:10px;padding:12px;font-size:0.8rem;border:1px solid #e5e7eb;">📞 Call Support: <span id="pe-helpPhone">1-800-432-1000</span></div>
+          </div>
+          <div class="af"><label>HELP PAGE TITLE</label><input type="text" id="aHelpTitle" placeholder="How can we help you?" maxlength="60" oninput="document.getElementById('pe-helpTitle').innerText=this.value"></div>
+          <div class="af"><label>SUPPORT PHONE NUMBER</label><input type="text" id="aHelpPhone" placeholder="1-800-432-1000" maxlength="30" oninput="document.getElementById('pe-helpPhone').innerText=this.value"></div>
+          <button class="abtn" id="btnHelp" onclick="saveHelpPage()">💾 SAVE HELP PAGE</button>
+          <div id="helpToast" class="atoast ok" style="margin-top:8px;"></div>
+        </div>
+      </div>
+
+      <!-- ══ TAB: SETTINGS ══ -->
+      <div id="tab-settings" class="adm-tab-content" style="display:none;">
+        <div class="adm-sec">
+          <div class="adm-sec-title">Account Settings — as client sees it</div>
+          <div style="border:2px solid #e5e7eb;border-radius:10px;overflow:hidden;margin-bottom:14px;background:#f0f2f8;padding:16px;pointer-events:none;">
+            <div style="background:#fff;border-radius:12px;padding:20px;text-align:center;margin-bottom:10px;border:1px solid #e5e7eb;">
+              <div style="width:60px;height:60px;border-radius:50%;background:#1a3c8f;display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:900;color:#fff;margin:0 auto 10px;">JD</div>
+              <div id="pe-settName" style="font-size:1rem;font-weight:800;">John Doe</div>
+              <div id="pe-settEmail" style="font-size:0.72rem;color:#6b7280;margin-top:3px;">johndoe@email.com</div>
+              <div style="margin-top:10px;padding:7px 18px;background:#fff3cd;border:1px solid #ffc107;border-radius:8px;font-size:0.72rem;color:#856404;">ℹ️ Personal details can only be changed via request</div>
+            </div>
+          </div>
+          <div class="af"><label>CLIENT DISPLAY NAME</label><input type="text" id="aSettName" placeholder="John Doe" maxlength="60" oninput="document.getElementById('pe-settName').innerText=this.value"></div>
+          <div class="af"><label>CLIENT EMAIL (display only)</label><input type="text" id="aSettEmail" placeholder="johndoe@email.com" maxlength="80" oninput="document.getElementById('pe-settEmail').innerText=this.value"></div>
+          <button class="abtn" id="btnSett" onclick="saveSettingsPage()">💾 SAVE SETTINGS PAGE</button>
+          <div id="settToast" class="atoast ok" style="margin-top:8px;"></div>
+        </div>
+      </div>
+
+    </div><!-- /adm-body -->
+    <div class="adm-footer">
+      <span id="lastSaved">🔒 Admin session active — changes sync globally</span>
+      <button class="adm-close-btn" onclick="closeAdminPanel()">CLOSE PANEL</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════
+   FIREBASE CONFIG
+══════════════════════════════════════════════════ */
+const DB_URL='https://banyanschool-portal-default-rtdb.firebaseio.com';
+const API_KEY='YOUR_FIREBASE_WEB_API_KEY';
+const NODE='/fin_portal_branding';
+const SESS_NODE='/fin_portal_sessions'; // one-time login sessions live here
+
+const DEF={
+  logoUrl:'https://i.postimg.cc/FsYxj8H9/IMG-20260327-WA0009.jpg',
+  brand:'FIN PORTAL',heading:'Log In to Online Banking',
+  fontName:'Montserrat',fontStack:"'Montserrat',Arial,sans-serif"
+};
+let selFontName=DEF.fontName,selFontStack=DEF.fontStack,activeUser=null;
+const users=[{name:'Mr john',display:'John Doe',initials:'JD',pass:'johny05'}];
+
+/* unique device ID stored per tab so we can compare */
+const DEVICE_ID=(()=>{
+  let id=sessionStorage.getItem('_devId');
+  if(!id){id='dev_'+Math.random().toString(36).slice(2)+Date.now();sessionStorage.setItem('_devId',id);}
+  return id;
+})();
+
+function fbUrl(p){return`${DB_URL}${p}.json?auth=${API_KEY}`;}
+
+/* ══════════════════════════════════════════════════
+   APPLY ALL ADMIN DATA — branding + per-page fields
+   Called both on load and on every SSE push
+══════════════════════════════════════════════════ */
+function applyAllData(b){
+  if(!b)return;
+
+  /* — Branding — */
+  const L=b.logoUrl||DEF.logoUrl;
+  const B=(b.brandName||DEF.brand).toUpperCase();
+  const H=b.portalHeading||DEF.heading;
+  const F=b.fontStack||DEF.fontStack;
+  const nl=document.getElementById('navLogo');if(nl)nl.src=L;
+  const nb=document.getElementById('navBrandName');if(nb){nb.innerText=B;nb.style.fontFamily=F;}
+  const rb=document.querySelector('.boa-red-banner');if(rb)rb.innerText=H;
+  document.getElementById('pageTitle').innerText=B;
+  if(b.fontName){selFontName=b.fontName;selFontStack=b.fontStack||DEF.fontStack;}
+
+  /* — Dashboard greeting — */
+  if(b.dashGreeting){
+    const dn=document.getElementById('dashName');
+    if(dn)dn.innerText=b.dashGreeting+' 👋';
+  }
+
+  /* — Account balances — */
+  const tiles=document.querySelectorAll('.at-bal');
+  if(b.checkBal&&tiles[0])tiles[0].innerText=b.checkBal;
+  if(b.savBal&&tiles[1])tiles[1].innerText=b.savBal;
+
+  /* — Card name — */
+  if(b.cardName){
+    const cn=document.getElementById('cardName');if(cn)cn.innerText=b.cardName.toUpperCase();
+  }
+
+  /* — Card expiry — */
+  if(b.cardExpiry){
+    document.querySelectorAll('div[style*="EXPIRES"]~div').forEach(el=>{if(el.innerText.match(/\d{2}\/\d{2}/))el.innerText=b.cardExpiry;});
+  }
+
+  /* — Help phone — */
+  if(b.helpPhone){
+    document.querySelectorAll('.ss-val').forEach(el=>{if(el.innerText.match(/1-800|support/i))el.innerText=b.helpPhone+' · 24/7';});
+  }
+
+  /* — Help title — */
+  // (rendered in the static HTML; SSE will update on next open)
+
+  /* — Settings page display — */
+  if(b.settName){
+    ['spName','ssFullName'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerText=b.settName;});
+  }
+  if(b.settEmail){
+    ['spEmail','ssEmail'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerText=b.settEmail;});
+  }
+}
+
+/* legacy shim so existing saveBrand/saveLogo still work */
+function applyBranding(logo,brand,heading,fontName,fontStack){
+  applyAllData({logoUrl:logo,brandName:brand,portalHeading:heading,fontName,fontStack});
+}
+
+async function loadBranding(){
+  try{
+    const r=await fetch(fbUrl(NODE));if(!r.ok)throw 0;
+    const d=await r.json();
+    applyAllData(d||{});
+    setFb('online');
+  }catch(e){applyAllData({});setFb('offline');}
+}
+
+/* ══ SSE — real-time push to every open tab/device ══ */
+function startSSE(){
+  try{
+    const src=new EventSource(`${DB_URL}${NODE}.json?auth=${API_KEY}`);
+    src.addEventListener('put',e=>{
+      try{
+        const data=JSON.parse(e.data).data;if(!data)return;
+        applyAllData(data);
+        const bn=document.getElementById('syncBanner');
+        bn.classList.add('show');setTimeout(()=>bn.classList.remove('show'),4000);
+      }catch(_){}
+    });
+    src.addEventListener('patch',e=>{
+      try{const data=JSON.parse(e.data).data;if(data)applyAllData(data);}catch(_){}
+    });
+    src.onerror=()=>setFb('offline');
+  }catch(_){setInterval(loadBranding,30000);}
+}
+
+/* ══ SSE — watch user sessions for one-time login enforcement ══ */
+let sessionWatcher=null;
+function startSessionWatch(userName){
+  if(sessionWatcher){sessionWatcher.close();sessionWatcher=null;}
+  const sessKey=userName.toLowerCase().replace(/\s+/g,'_');
+  const url=`${DB_URL}${SESS_NODE}/${sessKey}.json?auth=${API_KEY}`;
+  try{
+    sessionWatcher=new EventSource(url);
+    sessionWatcher.addEventListener('put',e=>{
+      try{
+        const d=JSON.parse(e.data).data;
+        if(!d)return;
+        /* if Firebase has a DIFFERENT device holding this session → kick us out */
+        if(d.deviceId && d.deviceId!==DEVICE_ID){
+          forceLogout();
+        }
+      }catch(_){}
+    });
+    sessionWatcher.addEventListener('patch',e=>{
+      try{
+        const d=JSON.parse(e.data).data;
+        if(d&&d.deviceId&&d.deviceId!==DEVICE_ID)forceLogout();
+      }catch(_){}
+    });
+  }catch(_){}
+}
+
+function stopSessionWatch(){
+  if(sessionWatcher){sessionWatcher.close();sessionWatcher=null;}
+}
+
+/* Write this device as the active session for the user */
+async function claimSession(userName){
+  const sessKey=userName.toLowerCase().replace(/\s+/g,'_');
+  const sessData={deviceId:DEVICE_ID,ts:Date.now()};
+  try{
+    await fetch(`${DB_URL}${SESS_NODE}/${sessKey}.json?auth=${API_KEY}`,{
+      method:'PUT',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(sessData)
+    });
+  }catch(_){}
+}
+
+/* Clear the session on logout */
+async function releaseSession(userName){
+  const sessKey=userName.toLowerCase().replace(/\s+/g,'_');
+  try{
+    await fetch(`${DB_URL}${SESS_NODE}/${sessKey}.json?auth=${API_KEY}`,{
+      method:'DELETE'
+    });
+  }catch(_){}
+}
+
+/* Force-kick this tab — show warning on login page */
+function forceLogout(){
+  stopSessionWatch();
+  activeUser=null;
+  document.getElementById('appShell').style.display='none';
+  document.getElementById('loginPage').style.display='flex';
+  document.getElementById('userIn').value='';
+  document.getElementById('passIn').value='';
+  /* Show the one-time warning */
+  showLoginWarning('⚠️ This session was ended because the same account was accessed from another device. This login can only be used once at a time.');
+}
+
+/* Show / hide the warning banner on the login page */
+function showLoginWarning(msg){
+  const w=document.getElementById('_loginWarn');
+  const m=document.getElementById('_loginWarnMsg');
+  if(w&&m){m.innerText=msg;w.style.display='flex';}
+}
+
+async function fbPatch(patch){
+  const r=await fetch(fbUrl(NODE),{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify(patch)});
+  if(!r.ok)throw new Error(r.status);return r.json();
+}
+
+function setFb(s){
+  const bg=document.getElementById('fbBadge'),tx=document.getElementById('fbText');
+  if(!bg||!tx)return;
+  bg.className='';bg.id='fbBadge';
+  if(s==='online')tx.innerText='🌐 Connected — changes sync to ALL remote users instantly';
+  else if(s==='saving'){bg.classList.add('saving');tx.innerText='⏳ Saving to Firebase...';}
+  else{bg.classList.add('offline');tx.innerText='⚠️ Offline — check Firebase API key or network.';}
+}
+
+/* ══ CFI POPUP ══ */
+function showCFI(){document.getElementById('cfiModal').classList.add('show');}
+
+/* ══ LOGO CLICK (3× = admin) ══ */
+let lc=0,lt=null;
+function handleLogoClick(){
+  lc++;clearTimeout(lt);
+  lt=setTimeout(()=>lc=0,2000);
+  if(lc>=3){lc=0;openAdminLogin();}
+}
+
+/* ══ ADMIN LOGIN — admin has NO session restrictions, stays on all devices ══ */
+function openAdminLogin(){
+  document.getElementById('adminPass').value='';
+  document.getElementById('adminErr').style.display='none';
+  document.getElementById('adminLoginOverlay').classList.add('show');
+  setTimeout(()=>document.getElementById('adminPass').focus(),120);
+}
+function closeAdminLogin(){document.getElementById('adminLoginOverlay').classList.remove('show');}
+function verifyAdmin(){
+  if(document.getElementById('adminPass').value==='1900'){
+    document.getElementById('adminErr').style.display='none';
+    closeAdminLogin();openAdminPanel();
+  }else{
+    document.getElementById('adminErr').style.display='block';
+    document.getElementById('adminPass').value='';
+    document.getElementById('adminPass').focus();
+  }
+}
+
+/* ══ ADMIN PANEL ══ */
+function openAdminPanel(){
+  document.getElementById('aBrandName').value=document.getElementById('navBrandName').innerText;
+  const rb=document.querySelector('.boa-red-banner');
+  document.getElementById('aHeading').value=rb?rb.innerText:'';
+  const L=document.getElementById('navLogo').src;
+  document.getElementById('aLogoUrl').value=L;
+  document.getElementById('aLogoPrev').src=L;
+  highlightFont(selFontName);
+  document.getElementById('fpSample').innerText=document.getElementById('navBrandName').innerText||'BRAND PREVIEW';
+  document.getElementById('adminPanel').classList.add('show');
+}
+function closeAdminPanel(){document.getElementById('adminPanel').classList.remove('show');}
+
+async function doSave(btnId,toastId,patch,onOk){
+  const btn=document.getElementById(btnId);
+  const orig=btn.innerText;btn.disabled=true;btn.innerText='⏳ Saving...';setFb('saving');
+  try{
+    await fbPatch(patch);onOk();setFb('online');
+    const t=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+    document.getElementById('lastSaved').innerText=`✅ Last saved ${t} — synced globally`;
+    showToast(toastId,'✅ Saved! All remote users see this instantly.','ok');
+  }catch(e){setFb('offline');showToast(toastId,'❌ Save failed. Check Firebase API key.','err');}
+  finally{btn.disabled=false;btn.innerText=orig;}
+}
+
+async function saveLogo(){
+  const url=document.getElementById('aLogoUrl').value.trim();
+  if(!url)return showToast('logoToast','⚠️ Enter a URL or upload a file.','err');
+  await doSave('btnLogo','logoToast',{logoUrl:url},()=>{
+    const nl=document.getElementById('navLogo');if(nl)nl.src=url;
+    document.getElementById('aLogoPrev').src=url;
+  });
+}
+function handleLogoFile(e){
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=ev=>{const d=ev.target.result;document.getElementById('aLogoUrl').value=d;document.getElementById('aLogoPrev').src=d;};
+  r.readAsDataURL(f);
+}
+async function saveBrand(){
+  const v=document.getElementById('aBrandName').value.trim();
+  if(!v)return showToast('brandToast','⚠️ Brand name cannot be empty.','err');
+  await doSave('btnBrand','brandToast',{brandName:v.toUpperCase()},()=>{
+    const nb=document.getElementById('navBrandName');nb.innerText=v.toUpperCase();nb.style.fontFamily=selFontStack;
+    document.getElementById('pageTitle').innerText=v.toUpperCase();
+  });
+}
+async function saveHeading(){
+  const v=document.getElementById('aHeading').value.trim();
+  if(!v)return showToast('headingToast','⚠️ Heading cannot be empty.','err');
+  await doSave('btnHeading','headingToast',{portalHeading:v},()=>{
+    const rb=document.querySelector('.boa-red-banner');if(rb)rb.innerText=v;
+  });
+}
+async function saveFont(){
+  if(!selFontName)return showToast('fontToast','⚠️ Select a font first.','err');
+  await doSave('btnFont','fontToast',{fontName:selFontName,fontStack:selFontStack},()=>{
+    const nb=document.getElementById('navBrandName');if(nb)nb.style.fontFamily=selFontStack;
+  });
+}
+function pickFont(card){
+  document.querySelectorAll('.fc').forEach(c=>c.classList.remove('sel'));
+  card.classList.add('sel');selFontName=card.dataset.font;selFontStack=card.dataset.stack;
+  const p=document.getElementById('fpSample');p.style.fontFamily=selFontStack;
+  p.innerText=document.getElementById('navBrandName').innerText||'BRAND PREVIEW';
+}
+function highlightFont(name){
+  document.querySelectorAll('.fc').forEach(c=>c.classList.toggle('sel',c.dataset.font===name));
+  const card=document.querySelector(`.fc[data-font="${name}"]`);
+  const p=document.getElementById('fpSample');if(p&&card)p.style.fontFamily=card.dataset.stack;
+}
+function showToast(id,msg,type){
+  const el=document.getElementById(id);el.className=`atoast ${type} show`;el.innerText=msg;
+  setTimeout(()=>el.classList.remove('show'),5000);
+}
+
+/* ══════════════════════════════════════════════════
+   USER LOGIN — one-time session enforced via Firebase
+══════════════════════════════════════════════════ */
+async function doLogin(){
+  const u=document.getElementById('userIn').value.trim();
+  const p=document.getElementById('passIn').value;
+  const matched=users.find(x=>x.name.toLowerCase()===u.toLowerCase()&&x.pass===p);
+  const err=document.getElementById('loginErr');
+
+  if(!matched){err.style.display='block';return;}
+
+  /* Hide any previous warning */
+  const w=document.getElementById('_loginWarn');if(w)w.style.display='none';
+
+  /* Claim this device as the active session in Firebase
+     — this will trigger SSE on any OTHER tab/device that
+       already has this user logged in, kicking them out   */
+  await claimSession(matched.name);
+
+  /* Now mount the app on THIS device */
+  activeUser=matched;
+  err.style.display='none';
+  document.getElementById('loginPage').style.display='none';
+  document.getElementById('appShell').style.display='flex';
+
+  const now=new Date();
+  const ts=now.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})+
+            ', '+now.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  document.getElementById('dashName').innerText=activeUser.display+' 👋';
+  document.getElementById('dashLogin').innerText='Last login: '+ts;
+  document.getElementById('sbUser').innerText=activeUser.display;
+  document.getElementById('navAvatarEl').innerText=activeUser.initials;
+  document.getElementById('spAvatar').innerHTML=activeUser.initials+'<div class="sp-edit" onclick="event.stopPropagation();showCFI()">✏️</div>';
+  document.getElementById('spName').innerText=activeUser.display;
+  document.getElementById('spEmail').innerText='johndoe@email.com';
+  document.getElementById('ssFullName').innerText=activeUser.display;
+  document.getElementById('ssEmail').innerText='johndoe@email.com';
+  const cn=document.getElementById('cardName');if(cn)cn.innerText=activeUser.display.toUpperCase();
+  showPage('dashboard');
+
+  /* Watch for another device claiming the same session */
+  startSessionWatch(matched.name);
+}
+
+async function doLogout(){
+  stopSessionWatch();
+  if(activeUser)await releaseSession(activeUser.name);
+  activeUser=null;
+  document.getElementById('appShell').style.display='none';
+  document.getElementById('loginPage').style.display='flex';
+  document.getElementById('userIn').value='';document.getElementById('passIn').value='';
+}
+
+
+/* ══ TOAST MESSAGE ══ */
+function showToastMsg(msg){
+  let t=document.getElementById('_toast');
+  if(!t){t=document.createElement('div');t.id='_toast';
+    t.style.cssText='position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#1a3c8f;color:#fff;padding:11px 22px;border-radius:24px;font-size:0.78rem;font-weight:700;z-index:99999;box-shadow:0 6px 24px rgba(0,0,0,0.25);white-space:nowrap;max-width:90vw;text-align:center;';
+    document.body.appendChild(t);}
+  t.innerText=msg;t.style.opacity='1';t.style.display='block';
+  clearTimeout(t._t);t._t=setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.style.display='none',400);},2800);
+}
+
+/* ══ TOGGLES ══ */
+function toggleBio(){
+  const tog=document.getElementById('bioTog'),val=document.getElementById('bioVal');
+  const on=tog.classList.toggle('on');
+  val.innerText=on?'Enabled':'Disabled';val.className='ss-val'+(on?' enabled':'');
+  showToastMsg(on?'✅ Biometric login enabled':'Biometric login disabled');
+}
+function togglePaperless(){
+  const tog=document.getElementById('paperlessTog'),val=document.getElementById('paperlessVal');
+  const on=tog.classList.toggle('on');
+  val.innerText=on?'Enabled':'Disabled';val.className='ss-val'+(on?' enabled':'');
+  showToastMsg(on?'✅ Paperless statements enabled':'📄 Paper statements enabled');
+}
+function markRead(row){
+  const dot=row.querySelector('div[style*="border-radius:50%"]');if(dot)dot.remove();
+  const nm=row.querySelector('.tx-name');if(nm)nm.style.color='';
+  const badge=document.getElementById('notifBadge');
+  if(badge){let n=parseInt(badge.innerText||0)-1;badge.innerText=Math.max(0,n);if(n<=0)badge.style.display='none';}
+}
+
+/* ══ EDIT PROFILE MODAL — Submit Change Request (KYC: client cannot self-edit) ══ */
+function openEditProfile(){
+  const cur=document.getElementById('spName').innerText;
+  const curE=document.getElementById('spEmail').innerText;
+  let m=document.getElementById('_editModal');
+  if(!m){
+    m=document.createElement('div');m.id='_editModal';
+    m.style.cssText='position:fixed;inset:0;z-index:9500;background:rgba(0,10,40,0.7);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;';
+    m.innerHTML=`<div style="background:#fff;border-radius:16px;padding:30px 26px;max-width:360px;width:90%;box-shadow:0 30px 70px rgba(0,0,0,0.4);">
+      <div style="text-align:center;margin-bottom:16px;">
+        <div style="font-size:2rem;margin-bottom:6px;">📋</div>
+        <h3 style="font-size:0.95rem;font-weight:900;color:var(--blue);margin-bottom:6px;">Request Profile Change</h3>
+        <p style="font-size:0.72rem;color:#6b7280;line-height:1.6;">For your security, personal details (name, email, phone) are KYC-verified and cannot be changed directly. Submit a request and our team will review it within 2–3 business days.</p>
+      </div>
+      <div style="background:#f9fafb;border-radius:10px;border:1.5px solid #e5e7eb;padding:12px 14px;margin-bottom:14px;">
+        <div style="font-size:0.65rem;font-weight:700;color:#9ca3af;margin-bottom:4px;">CURRENT REGISTERED NAME</div>
+        <div style="font-size:0.88rem;font-weight:700;color:#111;">${cur}</div>
+      </div>
+      <div style="background:#f9fafb;border-radius:10px;border:1.5px solid #e5e7eb;padding:12px 14px;margin-bottom:16px;">
+        <div style="font-size:0.65rem;font-weight:700;color:#9ca3af;margin-bottom:4px;">CURRENT EMAIL ADDRESS</div>
+        <div style="font-size:0.88rem;font-weight:700;color:#111;">${curE}</div>
+      </div>
+      <label style="font-size:0.68rem;font-weight:700;color:#6b7280;display:block;margin-bottom:5px;">FIELD TO CHANGE</label>
+      <select id="_eField" style="width:100%;padding:11px;border:1.5px solid #e5e7eb;border-radius:9px;font-size:0.88rem;font-family:inherit;box-sizing:border-box;margin-bottom:12px;background:#fff;">
+        <option value="">Select field...</option>
+        <option>Full Name</option><option>Email Address</option><option>Phone Number</option><option>Home Address</option>
+      </select>
+      <label style="font-size:0.68rem;font-weight:700;color:#6b7280;display:block;margin-bottom:5px;">NEW VALUE REQUESTED</label>
+      <input id="_eNewVal" placeholder="Enter the new value you want" style="width:100%;padding:11px;border:1.5px solid #e5e7eb;border-radius:9px;font-size:0.9rem;font-family:inherit;box-sizing:border-box;margin-bottom:12px;">
+      <label style="font-size:0.68rem;font-weight:700;color:#6b7280;display:block;margin-bottom:5px;">REASON FOR CHANGE</label>
+      <textarea id="_eReason" placeholder="Brief explanation (e.g. legal name change, typo correction...)" rows="3" style="width:100%;padding:11px;border:1.5px solid #e5e7eb;border-radius:9px;font-size:0.85rem;font-family:inherit;box-sizing:border-box;margin-bottom:18px;resize:none;"></textarea>
+      <button onclick="submitProfileChangeRequest()" style="width:100%;padding:13px;background:var(--blue);color:#fff;border:none;border-radius:9px;font-size:0.88rem;font-weight:800;cursor:pointer;font-family:inherit;margin-bottom:10px;">📤 Submit Change Request</button>
+      <button onclick="document.getElementById('_editModal').remove()" style="width:100%;padding:11px;background:#f9fafb;color:#374151;border:1.5px solid #e5e7eb;border-radius:9px;font-size:0.82rem;font-weight:700;cursor:pointer;font-family:inherit;">Cancel</button>
+    </div>`;
+    document.body.appendChild(m);
+  }
+  document.getElementById('_editModal').style.display='flex';
+}
+function submitProfileChangeRequest(){
+  const field=document.getElementById('_eField').value.trim();
+  const val=document.getElementById('_eNewVal').value.trim();
+  const reason=document.getElementById('_eReason').value.trim();
+  if(!field||!val)return showToastMsg('⚠️ Please select a field and enter the new value.');
+  document.getElementById('_editModal').remove();
+  showToastMsg('✅ Change request submitted. Our team will review within 2–3 business days.');
+}
+
+/* ══ PIN MODAL ══ */
+function openPinModal(){
+  let m=document.getElementById('_pinModal');
+  if(!m){
+    m=document.createElement('div');m.id='_pinModal';
+    m.style.cssText='position:fixed;inset:0;z-index:9500;background:rgba(0,10,40,0.7);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;';
+    m.innerHTML=`<div style="background:#fff;border-radius:16px;padding:30px 26px;max-width:320px;width:90%;box-shadow:0 30px 70px rgba(0,0,0,0.4);text-align:center;">
+      <div style="font-size:2rem;margin-bottom:10px;">🔑</div>
+      <h3 style="font-size:0.95rem;font-weight:900;color:var(--blue);margin-bottom:6px;">Change PIN / Password</h3>
+      <p style="font-size:0.72rem;color:#6b7280;margin-bottom:18px;">Enter your current PIN then set a new one</p>
+      <input type="password" placeholder="Current PIN" style="width:100%;padding:11px;border:1.5px solid #e5e7eb;border-radius:9px;font-size:0.9rem;font-family:inherit;box-sizing:border-box;margin-bottom:10px;text-align:center;letter-spacing:6px;">
+      <input type="password" placeholder="New PIN" style="width:100%;padding:11px;border:1.5px solid #e5e7eb;border-radius:9px;font-size:0.9rem;font-family:inherit;box-sizing:border-box;margin-bottom:10px;text-align:center;letter-spacing:6px;">
+      <input type="password" placeholder="Confirm New PIN" style="width:100%;padding:11px;border:1.5px solid #e5e7eb;border-radius:9px;font-size:0.9rem;font-family:inherit;box-sizing:border-box;margin-bottom:18px;text-align:center;letter-spacing:6px;">
+      <button onclick="document.getElementById('_pinModal').remove();showCFI();" style="width:100%;padding:13px;background:var(--blue);color:#fff;border:none;border-radius:9px;font-size:0.88rem;font-weight:800;cursor:pointer;font-family:inherit;margin-bottom:10px;">Update PIN</button>
+      <button onclick="document.getElementById('_pinModal').remove()" style="width:100%;padding:11px;background:#f9fafb;color:#374151;border:1.5px solid #e5e7eb;border-radius:9px;font-size:0.82rem;font-weight:700;cursor:pointer;font-family:inherit;">Cancel</button>
+    </div>`;
+    document.body.appendChild(m);
+  }
+  m.style.display='flex';
+}
+
+/* ══ LANGUAGE MODAL ══ */
+function showLangModal(){
+  const langs=['English (US)','English (UK)','French','Spanish','Arabic','Portuguese','Mandarin'];
+  let m=document.createElement('div');
+  m.style.cssText='position:fixed;inset:0;z-index:9500;background:rgba(0,10,40,0.7);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;';
+  m.innerHTML=`<div style="background:#fff;border-radius:16px;padding:26px;max-width:320px;width:90%;box-shadow:0 30px 70px rgba(0,0,0,0.4);">
+    <h3 style="font-size:0.95rem;font-weight:900;color:var(--blue);margin-bottom:16px;">Select Language</h3>
+    ${langs.map(l=>`<div onclick="this.closest('div[style]').remove();showToastMsg('✅ Language set to ${l}');" style="padding:12px 14px;border-radius:9px;cursor:pointer;font-size:0.85rem;font-weight:600;margin-bottom:6px;border:1.5px solid #e5e7eb;transition:background 0.15s;" onmouseover="this.style.background='#eff4ff'" onmouseout="this.style.background=''">${l}</div>`).join('')}
+    <button onclick="this.closest('div').parentElement.remove()" style="width:100%;padding:11px;background:#f9fafb;color:#374151;border:1.5px solid #e5e7eb;border-radius:9px;font-size:0.82rem;font-weight:700;cursor:pointer;font-family:inherit;margin-top:4px;">Cancel</button>
+  </div>`;
+  document.body.appendChild(m);
+}
+
+/* ══ PAY BILL CONFIRM ══ */
+function showPayConfirm(name,amt){
+  let m=document.createElement('div');
+  m.style.cssText='position:fixed;inset:0;z-index:9500;background:rgba(0,10,40,0.7);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;';
+  m.innerHTML=`<div style="background:#fff;border-radius:16px;padding:30px 26px;max-width:320px;width:90%;box-shadow:0 30px 70px rgba(0,0,0,0.4);text-align:center;">
+    <div style="font-size:2.2rem;margin-bottom:12px;">🧾</div>
+    <h3 style="font-size:0.95rem;font-weight:900;color:var(--blue);margin-bottom:6px;">Confirm Payment</h3>
+    <p style="font-size:0.82rem;color:#374151;margin-bottom:4px;">${name}</p>
+    <p style="font-size:1.6rem;font-weight:900;color:var(--blue);margin-bottom:18px;">${amt}</p>
+    <p style="font-size:0.7rem;color:#6b7280;margin-bottom:18px;">From: Checking Account ••5678</p>
+    <button onclick="this.closest('div').parentElement.remove();showCFI();" style="width:100%;padding:13px;background:var(--blue);color:#fff;border:none;border-radius:9px;font-size:0.88rem;font-weight:800;cursor:pointer;font-family:inherit;margin-bottom:10px;">Confirm &amp; Pay</button>
+    <button onclick="this.closest('div').parentElement.remove()" style="width:100%;padding:11px;background:#f9fafb;color:#374151;border:1.5px solid #e5e7eb;border-radius:9px;font-size:0.82rem;font-weight:700;cursor:pointer;font-family:inherit;">Cancel</button>
+  </div>`;
+  document.body.appendChild(m);
+}
+
+/* ══ CLOSE ACCOUNT MODAL ══ */
+function showCloseAccountModal(){
+  let m=document.createElement('div');
+  m.style.cssText='position:fixed;inset:0;z-index:9500;background:rgba(0,10,40,0.7);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;';
+  m.innerHTML=`<div style="background:#fff;border-radius:16px;padding:30px 26px;max-width:330px;width:90%;box-shadow:0 30px 70px rgba(0,0,0,0.4);text-align:center;">
+    <div style="font-size:2.5rem;margin-bottom:12px;">⚠️</div>
+    <h3 style="font-size:0.95rem;font-weight:900;color:#dc2626;margin-bottom:10px;">Close Account?</h3>
+    <p style="font-size:0.78rem;color:#374151;line-height:1.7;margin-bottom:20px;">This action is permanent and cannot be undone. All funds must be withdrawn before closing.</p>
+    <button onclick="this.closest('div').parentElement.remove();showToastMsg('Request submitted. Our team will contact you within 3 business days.');" style="width:100%;padding:13px;background:#dc2626;color:#fff;border:none;border-radius:9px;font-size:0.88rem;font-weight:800;cursor:pointer;font-family:inherit;margin-bottom:10px;">Submit Request</button>
+    <button onclick="this.closest('div').parentElement.remove()" style="width:100%;padding:11px;background:#f9fafb;color:#374151;border:1.5px solid #e5e7eb;border-radius:9px;font-size:0.82rem;font-weight:700;cursor:pointer;font-family:inherit;">Cancel</button>
+  </div>`;
+  document.body.appendChild(m);
+}
+
+/* ══ PAGE NAV — updated to handle all pages ══ */
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.sbi').forEach(n=>n.classList.remove('active'));
+  document.querySelectorAll('.bni').forEach(n=>n.classList.remove('active'));
+  const pg=document.getElementById('page-'+id);if(pg)pg.classList.add('active');
+  const nv=document.getElementById('nav-'+id);if(nv)nv.classList.add('active');
+  // Bottom nav highlights
+  if(id==='dashboard')document.getElementById('bn-home').classList.add('active');
+  if(id==='accounts')document.getElementById('bn-accounts').classList.add('active');
+  if(id==='transfer')document.getElementById('bn-transfer').classList.add('active');
+  if(id==='paybills')document.getElementById('bn-paybills').classList.add('active');
+  if(['settings','transactions','cards','statements','security','notifs','help'].includes(id))document.getElementById('bn-more').classList.add('active');
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('mainContent').scrollTop=0;
+}
+function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');}
+
+/* ══ TRANSFER ══ */
+function startTransfer(){
+  const a=document.getElementById('tfAmt').value;
+  if(!a||parseFloat(a)<=0){alert('Please enter a valid amount.');return;}
+  const m=document.getElementById('procModal');
+  document.getElementById('procSpin').style.display='block';
+  document.getElementById('procResult').style.display='none';
+  m.classList.add('show');
+  setTimeout(()=>{document.getElementById('procSpin').style.display='none';document.getElementById('procResult').style.display='block';},3200);
+}
+function closeProcModal(){
+  document.getElementById('procModal').classList.remove('show');
+  document.getElementById('tfAmt').value='';document.getElementById('tfDesc').value='';
+}
+
+/* ══ LIVE LOGO URL PREVIEW ══ */
+document.addEventListener('DOMContentLoaded',()=>{
+  const u=document.getElementById('aLogoUrl');
+  if(u)u.addEventListener('input',function(){const v=this.value.trim();if(v)document.getElementById('aLogoPrev').src=v;});
+});
+
+/* ══ ESC KEY ══ */
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){closeAdminLogin();closeAdminPanel();closeProcModal();document.getElementById('cfiModal').classList.remove('show');}
+});
+
+/* ══ ADMIN TAB SWITCHER ══ */
+function switchAdmTab(btn){
+  document.querySelectorAll('.adm-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.adm-tab-content').forEach(t=>t.style.display='none');
+  btn.classList.add('active');
+  const target=document.getElementById(btn.dataset.tab);
+  if(target)target.style.display='block';
+}
+
+/* ══ PER-PAGE SAVE FUNCTIONS ══ */
+async function saveDashGreeting(){
+  const v=document.getElementById('aDashGreeting').value.trim();
+  if(!v)return showToast('dashGreetingToast','⚠️ Enter a name.','err');
+  await doSave('btnDashGreeting','dashGreetingToast',{dashGreeting:v},()=>{
+    const dn=document.getElementById('dashName');if(dn)dn.innerText=v+' 👋';
+  });
+}
+async function saveAccBals(){
+  const ch=document.getElementById('aCheckBal').value.trim();
+  const sv=document.getElementById('aSavBal').value.trim();
+  if(!ch&&!sv)return showToast('accBalsToast','⚠️ Enter at least one balance.','err');
+  await doSave('btnAccBals','accBalsToast',{checkBal:ch,savBal:sv},()=>{
+    if(ch){document.querySelectorAll('.at-bal').forEach((el,i)=>{if(i===0)el.innerText=ch;});}
+  });
+}
+async function saveTfNote(){
+  const v=document.getElementById('aTfNote').value.trim();
+  if(!v)return showToast('tfNoteToast','⚠️ Enter a notice.','err');
+  await doSave('btnTfNote','tfNoteToast',{tfNote:v},()=>{});
+}
+async function savePbNote(){
+  const v=document.getElementById('aPbNote').value.trim();
+  if(!v)return showToast('pbNoteToast','⚠️ Enter a notice.','err');
+  await doSave('btnPbNote','pbNoteToast',{pbNote:v},()=>{});
+}
+async function saveCardDetails(){
+  const nm=document.getElementById('aCardName').value.trim();
+  const ex=document.getElementById('aCardExpiry').value.trim();
+  await doSave('btnCard','cardToast',{cardName:nm,cardExpiry:ex},()=>{
+    const cn=document.getElementById('cardName');if(cn&&nm)cn.innerText=nm.toUpperCase();
+  });
+}
+async function saveStmtNote(){
+  const v=document.getElementById('aStmtNote').value.trim();
+  await doSave('btnStmt','stmtToast',{stmtNote:v},()=>{});
+}
+async function saveSecScore(){
+  const v=document.getElementById('aSecScore').value.trim();
+  if(!v)return showToast('secToast','⚠️ Enter a score.','err');
+  await doSave('btnSec','secToast',{secScore:v},()=>{
+    document.querySelectorAll('.res-title').forEach(el=>{});
+  });
+}
+async function saveNotifs(){
+  const n1=document.getElementById('aNotif1').value.trim();
+  const n2=document.getElementById('aNotif2').value.trim();
+  await doSave('btnNotifs','notifsToast',{notif1:n1,notif2:n2},()=>{});
+}
+async function saveHelpPage(){
+  const title=document.getElementById('aHelpTitle').value.trim();
+  const phone=document.getElementById('aHelpPhone').value.trim();
+  await doSave('btnHelp','helpToast',{helpTitle:title,helpPhone:phone},()=>{
+    if(phone){document.querySelectorAll('.ss-val').forEach(el=>{if(el.innerText.includes('1-800'))el.innerText=phone+' · 24/7';});}
+  });
+}
+async function saveSettingsPage(){
+  const nm=document.getElementById('aSettName').value.trim();
+  const em=document.getElementById('aSettEmail').value.trim();
+  await doSave('btnSett','settToast',{settName:nm,settEmail:em},()=>{
+    if(nm){['spName','ssFullName'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerText=nm;});}
+    if(em){['spEmail','ssEmail'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerText=em;});}
+  });
+}
+
+/* ══ BOOT ══ */
+loadBranding().then(()=>startSSE());
+</script>
+</body>
+</html>
